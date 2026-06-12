@@ -49,6 +49,7 @@ import com.ambercatalbas.vaktinde.core.ui.theme.Gold
 
 @Composable
 fun SettingsScreen(
+    onNavigateToCitySelection: () -> Unit = {},
     viewModel: SettingsViewModel = hiltViewModel(),
 ) {
     val state by viewModel.uiState.collectAsStateWithLifecycle()
@@ -100,7 +101,7 @@ fun SettingsScreen(
                 icon = Icons.Default.LocationOn,
                 title = "Şehir",
                 detail = state.cityName,
-                onClick = { /* City selection */ },
+                onClick = onNavigateToCitySelection,
                 showDivider = false,
             )
         }
