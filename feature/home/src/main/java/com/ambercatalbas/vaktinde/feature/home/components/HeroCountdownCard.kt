@@ -26,11 +26,13 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.draw.drawBehind
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.drawscope.Fill
 import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
@@ -38,6 +40,7 @@ import androidx.compose.ui.unit.sp
 import com.ambercatalbas.vaktinde.core.domain.model.CountdownParts
 import com.ambercatalbas.vaktinde.core.domain.model.Prayer
 import com.ambercatalbas.vaktinde.core.domain.model.PrayerType
+import com.ambercatalbas.vaktinde.core.ui.R
 import kotlin.random.Random
 
 private val TwilightBlue1 = Color(0xFF234468)
@@ -60,36 +63,51 @@ fun HeroCountdownCard(
     if (currentPrayerType == null || nextPrayer == null) return
 
     val hasHours = countdown.hours != "00"
+    val currentName = prayerDisplayName(currentPrayerType)
+    val nextName = prayerDisplayName(nextPrayer.type)
+    val nextBadge = stringResource(R.string.home_next_prayer)
+    val hoursLabel = stringResource(R.string.home_hours)
+    val minutesLabel = stringResource(R.string.home_minutes)
 
     Box(
         modifier = modifier
             .fillMaxWidth()
             .clip(RoundedCornerShape(34.dp))
-    ) {
-        // Background gradient
-        Box(
-            modifier = Modifier
-                .fillMaxSize()
-                .background(
-                    Brush.radialGradient(
+            .drawBehind {
+                // Twilight radial gradient background
+                drawRect(TwilightBlue4)
+                drawCircle(
+                    brush = Brush.radialGradient(
                         colorStops = arrayOf(
                             0f to TwilightBlue1,
                             0.38f to TwilightBlue2,
                             0.70f to TwilightBlue3,
                             1f to TwilightBlue4,
                         ),
-                        center = Offset(Float.MAX_VALUE * 0.78f, 0f),
-                        radius = 1200f,
-                    )
+                        center = Offset(size.width * 0.78f, size.height * 0.08f),
+                        radius = 460.dp.toPx(),
+                    ),
+                    radius = 460.dp.toPx(),
+                    center = Offset(size.width * 0.78f, size.height * 0.08f),
                 )
-        )
-
+                // Bottom-left gold glow
+                drawCircle(
+                    brush = Brush.radialGradient(
+                        colors = listOf(GoldGlow.copy(alpha = 0.14f), Color.Transparent),
+                        center = Offset(size.width * 0.20f, size.height * 1.10f),
+                        radius = 260.dp.toPx(),
+                    ),
+                    radius = 260.dp.toPx(),
+                    center = Offset(size.width * 0.20f, size.height * 1.10f),
+                )
+            }
+    ) {
         // Star field
         Canvas(modifier = Modifier.fillMaxSize()) {
             val random = Random(42)
             repeat(16) {
                 val x = random.nextFloat() * size.width
-                val y = random.nextFloat() * size.height
+                val y = random.nextFloat() * size.height * 0.64f
                 val opacity = 0.2f + random.nextFloat() * 0.5f
                 val radius = 0.4f + random.nextFloat() * 1f
                 drawCircle(
@@ -101,15 +119,15 @@ fun HeroCountdownCard(
             }
         }
 
-        // Crescent moon
+        // Crescent moon (top-right)
         Icon(
             imageVector = Icons.Default.Nightlight,
             contentDescription = null,
             tint = GoldAccent.copy(alpha = 0.3f),
             modifier = Modifier
                 .align(Alignment.TopEnd)
-                .padding(top = 8.dp, end = 14.dp)
-                .size(90.dp)
+                .padding(top = 4.dp, end = 14.dp)
+                .size(120.dp)
         )
 
         // Content
@@ -118,7 +136,7 @@ fun HeroCountdownCard(
                 .fillMaxWidth()
                 .padding(start = 26.dp, end = 26.dp, top = 26.dp, bottom = 22.dp)
         ) {
-            // Current prayer indicator
+            // 1) Current prayer indicator
             Row(
                 verticalAlignment = Alignment.CenterVertically,
                 horizontalArrangement = Arrangement.spacedBy(8.dp),
@@ -130,7 +148,7 @@ fun HeroCountdownCard(
                         .background(GoldAccent)
                 )
                 Text(
-                    text = "ŞU AN · ${prayerDisplayName(currentPrayerType).uppercase()}",
+                    text = "${stringResource(R.string.home_current_prayer)} · ${currentName.uppercase()}",
                     color = TextDim.copy(alpha = 0.7f),
                     fontSize = 12.5.sp,
                     fontWeight = FontWeight.SemiBold,
@@ -140,7 +158,7 @@ fun HeroCountdownCard(
 
             Spacer(modifier = Modifier.height(22.dp))
 
-            // Next prayer info
+            // 2) Next prayer info
             Row(
                 horizontalArrangement = Arrangement.spacedBy(10.dp),
                 verticalAlignment = Alignment.Top,
@@ -155,80 +173,69 @@ fun HeroCountdownCard(
                 )
                 Column {
                     Text(
-                        text = "SONRAKİ NAMAZ",
+                        text = nextBadge,
                         color = TextDim.copy(alpha = 0.65f),
                         fontSize = 14.sp,
-                        fontWeight = FontWeight.Normal,
                     )
-                    Text(
-                        text = prayerDisplayName(nextPrayer.type),
-                        color = TextLight,
-                        fontSize = 27.sp,
-                        fontWeight = FontWeight.SemiBold,
-                        fontFamily = FontFamily.Serif,
-                    )
-                    Text(
-                        text = nextPrayer.timeString,
-                        color = GoldAccent,
-                        fontSize = 16.sp,
-                        fontWeight = FontWeight.SemiBold,
-                    )
+                    Row(
+                        verticalAlignment = Alignment.Bottom,
+                        horizontalArrangement = Arrangement.spacedBy(8.dp),
+                    ) {
+                        Text(
+                            text = nextName,
+                            color = TextLight,
+                            fontSize = 27.sp,
+                            fontWeight = FontWeight.SemiBold,
+                            fontFamily = FontFamily.Serif,
+                        )
+                        Text(
+                            text = nextPrayer.timeString,
+                            color = GoldAccent,
+                            fontSize = 16.sp,
+                            fontWeight = FontWeight.SemiBold,
+                            modifier = Modifier.padding(bottom = 2.dp),
+                        )
+                    }
                 }
             }
 
             Spacer(modifier = Modifier.height(18.dp))
 
-            // Big countdown
+            // 3) Big countdown
             Row(
                 verticalAlignment = Alignment.Bottom,
-                horizontalArrangement = Arrangement.spacedBy(2.dp),
             ) {
-                if (hasHours) {
-                    Text(
-                        text = "${countdown.hours}:${countdown.minutes}",
-                        color = TextLight,
-                        fontSize = 60.sp,
-                        fontWeight = FontWeight.Normal,
-                        fontFamily = FontFamily.Serif,
-                        lineHeight = 60.sp,
-                    )
-                    Text(
-                        text = ":${countdown.seconds}",
-                        color = TextDim.copy(alpha = 0.6f),
-                        fontSize = 30.sp,
-                        fontFamily = FontFamily.Serif,
-                        lineHeight = 30.sp,
-                        modifier = Modifier.padding(bottom = 4.dp),
-                    )
+                val mainText = if (hasHours) {
+                    "${countdown.hours}:${countdown.minutes}"
                 } else {
-                    Text(
-                        text = countdown.minutes,
-                        color = TextLight,
-                        fontSize = 60.sp,
-                        fontWeight = FontWeight.Normal,
-                        fontFamily = FontFamily.Serif,
-                        lineHeight = 60.sp,
-                    )
-                    Text(
-                        text = ":${countdown.seconds}",
-                        color = TextDim.copy(alpha = 0.6f),
-                        fontSize = 30.sp,
-                        fontFamily = FontFamily.Serif,
-                        lineHeight = 30.sp,
-                        modifier = Modifier.padding(bottom = 4.dp),
-                    )
+                    countdown.minutes
                 }
                 Text(
-                    text = if (hasHours) "saat" else "dakika",
+                    text = mainText,
+                    color = TextLight,
+                    fontSize = 60.sp,
+                    fontWeight = FontWeight.Normal,
+                    fontFamily = FontFamily.Serif,
+                    lineHeight = 60.sp,
+                )
+                Text(
+                    text = ":${countdown.seconds}",
+                    color = TextDim.copy(alpha = 0.6f),
+                    fontSize = 30.sp,
+                    fontFamily = FontFamily.Serif,
+                    modifier = Modifier.padding(bottom = 6.dp),
+                )
+                Text(
+                    text = if (hasHours) hoursLabel else minutesLabel,
                     color = TextDim.copy(alpha = 0.6f),
                     fontSize = 13.5.sp,
-                    modifier = Modifier.padding(start = 10.dp, bottom = 8.dp),
+                    modifier = Modifier.padding(start = 10.dp, bottom = 10.dp),
                 )
             }
 
             Spacer(modifier = Modifier.height(20.dp))
 
-            // Progress bar
+            // 4) Progress bar
             Box(
                 modifier = Modifier
                     .fillMaxWidth()
@@ -238,7 +245,7 @@ fun HeroCountdownCard(
             ) {
                 Box(
                     modifier = Modifier
-                        .fillMaxWidth(progress.toFloat())
+                        .fillMaxWidth(progress.toFloat().coerceIn(0f, 1f))
                         .height(5.dp)
                         .clip(RoundedCornerShape(50))
                         .background(
@@ -256,14 +263,13 @@ fun HeroCountdownCard(
                 modifier = Modifier.fillMaxWidth(),
                 horizontalArrangement = Arrangement.SpaceBetween,
             ) {
-                val currentPrayer = prayerDisplayName(currentPrayerType)
                 Text(
-                    text = currentPrayer,
+                    text = currentName,
                     color = TextDim.copy(alpha = 0.55f),
                     fontSize = 12.sp,
                 )
                 Text(
-                    text = "${prayerDisplayName(nextPrayer.type)} ${nextPrayer.timeString}",
+                    text = "$nextName ${nextPrayer.timeString}",
                     color = TextDim.copy(alpha = 0.55f),
                     fontSize = 12.sp,
                 )
@@ -272,13 +278,14 @@ fun HeroCountdownCard(
     }
 }
 
+@Composable
 fun prayerDisplayName(type: PrayerType): String = when (type) {
-    PrayerType.IMSAK -> "İmsak"
-    PrayerType.GUNES -> "Güneş"
-    PrayerType.OGLE -> "Öğle"
-    PrayerType.IKINDI -> "İkindi"
-    PrayerType.AKSAM -> "Akşam"
-    PrayerType.YATSI -> "Yatsı"
+    PrayerType.IMSAK -> stringResource(R.string.prayer_imsak)
+    PrayerType.GUNES -> stringResource(R.string.prayer_gunes)
+    PrayerType.OGLE -> stringResource(R.string.prayer_ogle)
+    PrayerType.IKINDI -> stringResource(R.string.prayer_ikindi)
+    PrayerType.AKSAM -> stringResource(R.string.prayer_aksam)
+    PrayerType.YATSI -> stringResource(R.string.prayer_yatsi)
 }
 
 fun prayerIcon(type: PrayerType): ImageVector = when (type) {
