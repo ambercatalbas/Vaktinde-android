@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- App -->
+    <string name="app_name">Vaktinde</string>
+
+    <!-- Common -->
+    <string name="back">Back</string>
+    <string name="skip">Skip</string>
+    <string name="continue_text">Continue</string>
+    <string name="done">Done</string>
+    <string name="close">Close</string>
+    <string name="start">Start</string>
+    <string name="cancel">Cancel</string>
+
+    <!-- Prayer Names -->
+    <string name="prayer_imsak">Fajr</string>
+    <string name="prayer_gunes">Sunrise</string>
+    <string name="prayer_ogle">Dhuhr</string>
+    <string name="prayer_ikindi">Asr</string>
+    <string name="prayer_aksam">Maghrib</string>
+    <string name="prayer_yatsi">Isha</string>
+
+    <!-- Prayer Subtitles -->
+    <string name="prayer_sub_imsak">Dawn</string>
+    <string name="prayer_sub_gunes">Morning</string>
+    <string name="prayer_sub_ogle">Noon</string>
+    <string name="prayer_sub_ikindi">Afternoon</string>
+    <string name="prayer_sub_aksam">Evening</string>
+    <string name="prayer_sub_yatsi">Night</string>
+
+    <!-- Home -->
+    <string name="home_current_prayer">CURRENT</string>
+    <string name="home_next_prayer">NEXT PRAYER</string>
+    <string name="home_next_badge">NEXT</string>
+    <string name="home_todays_prayers">TODAY\'S PRAYERS</string>
+    <string name="home_hijri_calendar">HIJRI CALENDAR</string>
+    <string name="home_hours">hours</string>
+    <string name="home_minutes">minutes</string>
+
+    <!-- Tabs -->
+    <string name="tab_home">Times</string>
+    <string name="tab_qibla">Qibla</string>
+    <string name="tab_calendar">Calendar</string>
+    <string name="tab_settings">Settings</string>
+
+    <!-- Qibla -->
+    <string name="qibla_title">Qibla</string>
+    <string name="qibla_aligned">Aligned</string>
+    <string name="qibla_turn">Turn</string>
+    <string name="qibla_aligned_hint">You are facing the Qibla</string>
+    <string name="qibla_turn_hint">Turn your device towards the Qibla</string>
+    <string name="qibla_angle">Qibla Angle</string>
+    <string name="qibla_location">Location</string>
+    <string name="qibla_direction">Direction</string>
+    <string name="qibla_distance">Distance</string>
+
+    <!-- Calendar -->
+    <string name="calendar_title">Calendar</string>
+
+    <!-- Settings -->
+    <string name="settings_title">Settings</string>
+    <string name="settings_preferences">PREFERENCES</string>
+    <string name="settings_language">Language</string>
+    <string name="settings_theme">Theme</string>
+    <string name="settings_calc_method">Calculation Method</string>
+    <string name="settings_location">LOCATION</string>
+    <string name="settings_city">City</string>
+    <string name="settings_notifications">NOTIFICATIONS</string>
+    <string name="settings_notification_settings">Notification Settings</string>
+    <string name="settings_customize">Customize</string>
+    <string name="settings_about">ABOUT</string>
+    <string name="settings_about_app">About Vaktinde</string>
+    <string name="settings_share">Share App</string>
+
+    <!-- Themes -->
+    <string name="theme_dark">Dark</string>
+    <string name="theme_light">Light</string>
+    <string name="theme_system">System</string>
+
+    <!-- City Selection -->
+    <string name="city_selection_title">City Selection</string>
+    <string name="city_search_hint">Search city…</string>
+    <string name="city_current_location">Current Location</string>
+    <string name="city_current_location_desc">Auto-detect via GPS</string>
+    <string name="city_popular">POPULAR CITIES</string>
+
+    <!-- Onboarding -->
+    <string name="onboarding_welcome_title">Vaktinde</string>
+    <string name="onboarding_welcome_subtitle">Prayer Times</string>
+    <string name="onboarding_welcome_desc">Track prayer times, find Qibla direction, and organize your daily worship.</string>
+    <string name="onboarding_location_title">Location Permission</string>
+    <string name="onboarding_location_subtitle">For Accurate Times</string>
+    <string name="onboarding_location_desc">Location permission is required to show you the most accurate prayer times for your area.</string>
+    <string name="onboarding_notif_title">Notifications</string>
+    <string name="onboarding_notif_subtitle">Never Miss a Prayer</string>
+    <string name="onboarding_notif_desc">Get notified with adhan sounds at prayer times. Customize for each prayer individually.</string>
+
+    <!-- Calc Methods -->
+    <string name="method_diyanet">Diyanet</string>
+    <string name="method_mwl">MWL (Muslim World League)</string>
+    <string name="method_isna">ISNA</string>
+    <string name="method_egypt">Egypt</string>
+    <string name="method_umm_al_qura">Umm Al-Qura</string>
+    <string name="method_karachi">Karachi</string>
+</resources>

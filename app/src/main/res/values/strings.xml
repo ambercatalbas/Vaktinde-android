@@ -1,4 +1,105 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <!-- App -->
     <string name="app_name">Vaktinde</string>
+
+    <!-- Common -->
+    <string name="back">Geri</string>
+    <string name="skip">Atla</string>
+    <string name="continue_text">Devam</string>
+    <string name="done">Tamam</string>
+    <string name="close">Kapat</string>
+    <string name="start">Başla</string>
+    <string name="cancel">İptal</string>
+
+    <!-- Prayer Names -->
+    <string name="prayer_imsak">İmsak</string>
+    <string name="prayer_gunes">Güneş</string>
+    <string name="prayer_ogle">Öğle</string>
+    <string name="prayer_ikindi">İkindi</string>
+    <string name="prayer_aksam">Akşam</string>
+    <string name="prayer_yatsi">Yatsı</string>
+
+    <!-- Prayer Subtitles -->
+    <string name="prayer_sub_imsak">Fajr</string>
+    <string name="prayer_sub_gunes">Sunrise</string>
+    <string name="prayer_sub_ogle">Dhuhr</string>
+    <string name="prayer_sub_ikindi">Asr</string>
+    <string name="prayer_sub_aksam">Maghrib</string>
+    <string name="prayer_sub_yatsi">Isha</string>
+
+    <!-- Home -->
+    <string name="home_current_prayer">ŞU AN</string>
+    <string name="home_next_prayer">SONRAKİ NAMAZ</string>
+    <string name="home_next_badge">SONRAKİ</string>
+    <string name="home_todays_prayers">BUGÜNÜN NAMAZLARI</string>
+    <string name="home_hijri_calendar">HİCRİ TAKVİM</string>
+    <string name="home_hours">saat</string>
+    <string name="home_minutes">dakika</string>
+
+    <!-- Tabs -->
+    <string name="tab_home">Vakitler</string>
+    <string name="tab_qibla">Kıble</string>
+    <string name="tab_calendar">Takvim</string>
+    <string name="tab_settings">Ayarlar</string>
+
+    <!-- Qibla -->
+    <string name="qibla_title">Kıble</string>
+    <string name="qibla_aligned">Hizalı</string>
+    <string name="qibla_turn">Döndür</string>
+    <string name="qibla_aligned_hint">Kıble yönündesiniz</string>
+    <string name="qibla_turn_hint">Cihazı Kıble yönüne çevirin</string>
+    <string name="qibla_angle">Kıble Açısı</string>
+    <string name="qibla_location">Konum</string>
+    <string name="qibla_direction">Yön</string>
+    <string name="qibla_distance">Mesafe</string>
+
+    <!-- Calendar -->
+    <string name="calendar_title">Takvim</string>
+
+    <!-- Settings -->
+    <string name="settings_title">Ayarlar</string>
+    <string name="settings_preferences">TERCİHLER</string>
+    <string name="settings_language">Dil</string>
+    <string name="settings_theme">Tema</string>
+    <string name="settings_calc_method">Hesaplama Metodu</string>
+    <string name="settings_location">KONUM</string>
+    <string name="settings_city">Şehir</string>
+    <string name="settings_notifications">BİLDİRİMLER</string>
+    <string name="settings_notification_settings">Bildirim Ayarları</string>
+    <string name="settings_customize">Özelleştir</string>
+    <string name="settings_about">HAKKINDA</string>
+    <string name="settings_about_app">Vaktinde Hakkında</string>
+    <string name="settings_share">Uygulamayı Paylaş</string>
+
+    <!-- Themes -->
+    <string name="theme_dark">Koyu</string>
+    <string name="theme_light">Açık</string>
+    <string name="theme_system">Sistem</string>
+
+    <!-- City Selection -->
+    <string name="city_selection_title">Şehir Seçimi</string>
+    <string name="city_search_hint">Şehir ara…</string>
+    <string name="city_current_location">Mevcut Konum</string>
+    <string name="city_current_location_desc">GPS ile otomatik tespit</string>
+    <string name="city_popular">POPÜLER ŞEHİRLER</string>
+
+    <!-- Onboarding -->
+    <string name="onboarding_welcome_title">Vaktinde</string>
+    <string name="onboarding_welcome_subtitle">Namaz Vakitleri</string>
+    <string name="onboarding_welcome_desc">Namaz vakitlerini takip edin, Kıble yönünü bulun ve günlük ibadetlerinizi düzenleyin.</string>
+    <string name="onboarding_location_title">Konum İzni</string>
+    <string name="onboarding_location_subtitle">Doğru Vakitler İçin</string>
+    <string name="onboarding_location_desc">Bulunduğunuz konuma göre en doğru namaz vakitlerini gösterebilmemiz için konum izni gereklidir.</string>
+    <string name="onboarding_notif_title">Bildirimler</string>
+    <string name="onboarding_notif_subtitle">Hiçbir Vakti Kaçırmayın</string>
+    <string name="onboarding_notif_desc">Namaz vakitlerinde ezan sesiyle bildirim alın. Her vakit için ayrı ayrı özelleştirebilirsiniz.</string>
+
+    <!-- Calc Methods -->
+    <string name="method_diyanet">Diyanet</string>
+    <string name="method_mwl">MWL (Muslim World League)</string>
+    <string name="method_isna">ISNA</string>
+    <string name="method_egypt">Mısır</string>
+    <string name="method_umm_al_qura">Umm Al-Qura</string>
+    <string name="method_karachi">Karachi</string>
 </resources>

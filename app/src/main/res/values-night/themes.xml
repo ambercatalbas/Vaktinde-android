@@ -5,7 +5,4 @@
         <item name="android:navigationBarColor">@android:color/transparent</item>
         <item name="android:windowBackground">@color/splash_background</item>
     </style>
-
-    <color name="splash_background">#060D17</color>
-    <color name="gold">#D4A44A</color>
 </resources>

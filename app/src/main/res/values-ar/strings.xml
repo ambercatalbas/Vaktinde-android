@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- App -->
+    <string name="app_name">وقتنده</string>
+
+    <!-- Common -->
+    <string name="back">رجوع</string>
+    <string name="skip">تخطي</string>
+    <string name="continue_text">متابعة</string>
+    <string name="done">تم</string>
+    <string name="close">إغلاق</string>
+    <string name="start">ابدأ</string>
+    <string name="cancel">إلغاء</string>
+
+    <!-- Prayer Names -->
+    <string name="prayer_imsak">الفجر</string>
+    <string name="prayer_gunes">الشروق</string>
+    <string name="prayer_ogle">الظهر</string>
+    <string name="prayer_ikindi">العصر</string>
+    <string name="prayer_aksam">المغرب</string>
+    <string name="prayer_yatsi">العشاء</string>
+
+    <!-- Prayer Subtitles -->
+    <string name="prayer_sub_imsak">الفجر</string>
+    <string name="prayer_sub_gunes">الشروق</string>
+    <string name="prayer_sub_ogle">الظهر</string>
+    <string name="prayer_sub_ikindi">العصر</string>
+    <string name="prayer_sub_aksam">المغرب</string>
+    <string name="prayer_sub_yatsi">العشاء</string>
+
+    <!-- Home -->
+    <string name="home_current_prayer">الحالي</string>
+    <string name="home_next_prayer">الصلاة التالية</string>
+    <string name="home_next_badge">التالي</string>
+    <string name="home_todays_prayers">صلوات اليوم</string>
+    <string name="home_hijri_calendar">التقويم الهجري</string>
+    <string name="home_hours">ساعات</string>
+    <string name="home_minutes">دقائق</string>
+
+    <!-- Tabs -->
+    <string name="tab_home">الأوقات</string>
+    <string name="tab_qibla">القبلة</string>
+    <string name="tab_calendar">التقويم</string>
+    <string name="tab_settings">الإعدادات</string>
+
+    <!-- Qibla -->
+    <string name="qibla_title">القبلة</string>
+    <string name="qibla_aligned">محاذاة</string>
+    <string name="qibla_turn">أدر</string>
+    <string name="qibla_aligned_hint">أنت تواجه القبلة</string>
+    <string name="qibla_turn_hint">أدر جهازك نحو القبلة</string>
+    <string name="qibla_angle">زاوية القبلة</string>
+    <string name="qibla_location">الموقع</string>
+    <string name="qibla_direction">الاتجاه</string>
+    <string name="qibla_distance">المسافة</string>
+
+    <!-- Calendar -->
+    <string name="calendar_title">التقويم</string>
+
+    <!-- Settings -->
+    <string name="settings_title">الإعدادات</string>
+    <string name="settings_preferences">التفضيلات</string>
+    <string name="settings_language">اللغة</string>
+    <string name="settings_theme">المظهر</string>
+    <string name="settings_calc_method">طريقة الحساب</string>
+    <string name="settings_location">الموقع</string>
+    <string name="settings_city">المدينة</string>
+    <string name="settings_notifications">الإشعارات</string>
+    <string name="settings_notification_settings">إعدادات الإشعارات</string>
+    <string name="settings_customize">تخصيص</string>
+    <string name="settings_about">حول</string>
+    <string name="settings_about_app">حول وقتنده</string>
+    <string name="settings_share">مشاركة التطبيق</string>
+
+    <!-- Themes -->
+    <string name="theme_dark">داكن</string>
+    <string name="theme_light">فاتح</string>
+    <string name="theme_system">النظام</string>
+
+    <!-- City Selection -->
+    <string name="city_selection_title">اختيار المدينة</string>
+    <string name="city_search_hint">ابحث عن مدينة…</string>
+    <string name="city_current_location">الموقع الحالي</string>
+    <string name="city_current_location_desc">اكتشاف تلقائي عبر GPS</string>
+    <string name="city_popular">المدن الشائعة</string>
+
+    <!-- Onboarding -->
+    <string name="onboarding_welcome_title">وقتنده</string>
+    <string name="onboarding_welcome_subtitle">مواقيت الصلاة</string>
+    <string name="onboarding_welcome_desc">تتبع مواقيت الصلاة، اعثر على اتجاه القبلة، ونظم عبادتك اليومية.</string>
+    <string name="onboarding_location_title">إذن الموقع</string>
+    <string name="onboarding_location_subtitle">لأوقات دقيقة</string>
+    <string name="onboarding_location_desc">إذن الموقع مطلوب لعرض أوقات الصلاة الأكثر دقة لمنطقتك.</string>
+    <string name="onboarding_notif_title">الإشعارات</string>
+    <string name="onboarding_notif_subtitle">لا تفوت أي صلاة</string>
+    <string name="onboarding_notif_desc">احصل على إشعارات بصوت الأذان عند أوقات الصلاة. خصص لكل صلاة على حدة.</string>
+
+    <!-- Calc Methods -->
+    <string name="method_diyanet">ديانت</string>
+    <string name="method_mwl">رابطة العالم الإسلامي</string>
+    <string name="method_isna">الجمعية الإسلامية لأمريكا الشمالية</string>
+    <string name="method_egypt">مصر</string>
+    <string name="method_umm_al_qura">أم القرى</string>
+    <string name="method_karachi">كراتشي</string>
+</resources>
