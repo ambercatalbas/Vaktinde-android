@@ -27,6 +27,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.drawBehind
+import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
@@ -119,7 +120,7 @@ fun HeroCountdownCard(
             }
         }
 
-        // Crescent moon (top-right)
+        // Crescent moon (top-right, rotated 45° to face upward)
         Icon(
             imageVector = Icons.Default.Nightlight,
             contentDescription = null,
@@ -128,6 +129,7 @@ fun HeroCountdownCard(
                 .align(Alignment.TopEnd)
                 .padding(top = 4.dp, end = 14.dp)
                 .size(120.dp)
+                .graphicsLayer { rotationZ = -45f }
         )
 
         // Content
