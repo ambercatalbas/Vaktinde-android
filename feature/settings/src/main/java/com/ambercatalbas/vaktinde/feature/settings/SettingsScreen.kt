@@ -1,5 +1,6 @@
 package com.ambercatalbas.vaktinde.feature.settings
 
+import android.content.Intent
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
@@ -32,12 +33,16 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
@@ -55,6 +60,8 @@ fun SettingsScreen(
     viewModel: SettingsViewModel = hiltViewModel(),
 ) {
     val state by viewModel.uiState.collectAsStateWithLifecycle()
+    val context = LocalContext.current
+    var showAboutDialog by remember { mutableStateOf(false) }
 
     Column(
         modifier = Modifier
@@ -117,7 +124,13 @@ fun SettingsScreen(
                 icon = Icons.Default.Notifications,
                 title = stringResource(R.string.settings_notification_settings),
                 detail = stringResource(R.string.settings_customize),
-                onClick = { /* Notification settings */ },
+                onClick = {
+                    val intent = Intent().apply {
+                        action = "android.settings.APP_NOTIFICATION_SETTINGS"
+                        putExtra("android.provider.extra.APP_PACKAGE", context.packageName)
+                    }
+                    context.startActivity(intent)
+                },
                 showDivider = false,
             )
         }
@@ -130,12 +143,22 @@ fun SettingsScreen(
             SettingsRow(
                 icon = Icons.Default.Info,
                 title = stringResource(R.string.settings_about_app),
-                onClick = {},
+                onClick = { showAboutDialog = true },
             )
             SettingsRow(
                 icon = Icons.Default.Share,
                 title = stringResource(R.string.settings_share),
-                onClick = {},
+                onClick = {
+                    val shareIntent = Intent(Intent.ACTION_SEND).apply {
+                        type = "text/plain"
+                        putExtra(Intent.EXTRA_SUBJECT, "Vaktinde")
+                        putExtra(
+                            Intent.EXTRA_TEXT,
+                            "Vaktinde - Namaz Vakitleri\nhttps://play.google.com/store/apps/details?id=com.ambercatalbas.vaktinde"
+                        )
+                    }
+                    context.startActivity(Intent.createChooser(shareIntent, null))
+                },
                 showDivider = false,
             )
         }
@@ -143,20 +166,25 @@ fun SettingsScreen(
         Spacer(modifier = Modifier.height(100.dp))
     }
 
-    // Dialogs
+    // Theme dialog
     if (state.showThemeDialog) {
         SelectionDialog(
-            title = "Tema",
-            options = listOf("Sistem" to "system", "Koyu" to "dark", "Açık" to "light"),
+            title = stringResource(R.string.settings_theme),
+            options = listOf(
+                stringResource(R.string.theme_system) to "system",
+                stringResource(R.string.theme_dark) to "dark",
+                stringResource(R.string.theme_light) to "light",
+            ),
             selectedValue = state.theme,
             onSelect = { viewModel.setTheme(it); viewModel.showThemeDialog(false) },
             onDismiss = { viewModel.showThemeDialog(false) },
         )
     }
 
+    // Language dialog
     if (state.showLanguageDialog) {
         SelectionDialog(
-            title = "Dil",
+            title = stringResource(R.string.settings_language),
             options = listOf("Türkçe" to "tr", "English" to "en", "العربية" to "ar"),
             selectedValue = state.language,
             onSelect = { viewModel.setLanguage(it); viewModel.showLanguageDialog(false) },
@@ -164,17 +192,18 @@ fun SettingsScreen(
         )
     }
 
+    // Calc method dialog
     if (state.showMethodDialog) {
         SelectionDialog(
-            title = "Hesaplama Metodu",
+            title = stringResource(R.string.settings_calc_method),
             options = CalcMethod.entries.map { method ->
                 val name = when (method) {
-                    CalcMethod.DIYANET -> "Diyanet"
-                    CalcMethod.MWL -> "MWL (Muslim World League)"
-                    CalcMethod.ISNA -> "ISNA"
-                    CalcMethod.EGYPT -> "Mısır"
-                    CalcMethod.UMM_AL_QURA -> "Umm Al-Qura"
-                    CalcMethod.KARACHI -> "Karachi"
+                    CalcMethod.DIYANET -> stringResource(R.string.method_diyanet)
+                    CalcMethod.MWL -> stringResource(R.string.method_mwl)
+                    CalcMethod.ISNA -> stringResource(R.string.method_isna)
+                    CalcMethod.EGYPT -> stringResource(R.string.method_egypt)
+                    CalcMethod.UMM_AL_QURA -> stringResource(R.string.method_umm_al_qura)
+                    CalcMethod.KARACHI -> stringResource(R.string.method_karachi)
                 }
                 name to method.key
             },
@@ -184,6 +213,37 @@ fun SettingsScreen(
                 viewModel.showMethodDialog(false)
             },
             onDismiss = { viewModel.showMethodDialog(false) },
+        )
+    }
+
+    // About dialog
+    if (showAboutDialog) {
+        AlertDialog(
+            onDismissRequest = { showAboutDialog = false },
+            title = { Text(stringResource(R.string.settings_about_app)) },
+            text = {
+                Column(verticalArrangement = Arrangement.spacedBy(8.dp)) {
+                    Text(
+                        text = "Vaktinde v1.0.0",
+                        fontWeight = FontWeight.SemiBold,
+                    )
+                    Text(
+                        text = "Namaz vakitleri, Kıble yönü ve Hicri takvim.",
+                        color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.7f),
+                        fontSize = 14.sp,
+                    )
+                    Text(
+                        text = "© 2024 Amber Catalbas",
+                        color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.5f),
+                        fontSize = 13.sp,
+                    )
+                }
+            },
+            confirmButton = {
+                TextButton(onClick = { showAboutDialog = false }) {
+                    Text(stringResource(R.string.close))
+                }
+            },
         )
     }
 }
@@ -361,7 +421,7 @@ private fun SelectionDialog(
         },
         confirmButton = {
             TextButton(onClick = onDismiss) {
-                Text("Kapat")
+                Text(stringResource(R.string.close))
             }
         },
     )
