@@ -24,17 +24,20 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
+import android.content.Intent
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import com.ambercatalbas.vaktinde.core.domain.model.PrayerType
 import com.ambercatalbas.vaktinde.core.ui.R
 import com.ambercatalbas.vaktinde.core.ui.theme.Dimens
 import com.ambercatalbas.vaktinde.feature.home.components.HeroCountdownCard
@@ -44,9 +47,22 @@ import com.ambercatalbas.vaktinde.feature.home.components.PrayerTimeRow
 
 @Composable
 fun HomeScreen(
+    onNavigateToCitySelection: () -> Unit = {},
+    onNavigateToNotifications: () -> Unit = {},
     viewModel: HomeViewModel = hiltViewModel(),
 ) {
     val state by viewModel.uiState.collectAsStateWithLifecycle()
+    val context = LocalContext.current
+
+    // Precompute localized prayer names for share
+    val prayerNames = mapOf(
+        PrayerType.IMSAK to stringResource(R.string.prayer_imsak),
+        PrayerType.GUNES to stringResource(R.string.prayer_gunes),
+        PrayerType.OGLE to stringResource(R.string.prayer_ogle),
+        PrayerType.IKINDI to stringResource(R.string.prayer_ikindi),
+        PrayerType.AKSAM to stringResource(R.string.prayer_aksam),
+        PrayerType.YATSI to stringResource(R.string.prayer_yatsi),
+    )
 
     Column(
         modifier = Modifier
@@ -58,6 +74,28 @@ fun HomeScreen(
         TopBar(
             cityName = state.cityName,
             gregorianDate = state.gregorianDate,
+            onCityClick = onNavigateToCitySelection,
+            onNotificationsClick = onNavigateToNotifications,
+            onShareClick = {
+                val prayers = state.dailyPrayers?.prayers
+                if (prayers != null) {
+                    val shareText = buildString {
+                        appendLine("${state.cityName} - ${state.gregorianDate}")
+                        appendLine()
+                        prayers.forEach { prayer ->
+                            val name = prayerNames[prayer.type] ?: prayer.type.key
+                            appendLine("$name: ${prayer.timeString}")
+                        }
+                        appendLine()
+                        appendLine("Vaktinde")
+                    }
+                    val intent = Intent(Intent.ACTION_SEND).apply {
+                        type = "text/plain"
+                        putExtra(Intent.EXTRA_TEXT, shareText)
+                    }
+                    context.startActivity(Intent.createChooser(intent, null))
+                }
+            },
         )
 
         // Hero countdown card
@@ -151,6 +189,9 @@ fun HomeScreen(
 private fun TopBar(
     cityName: String,
     gregorianDate: String,
+    onCityClick: () -> Unit,
+    onNotificationsClick: () -> Unit,
+    onShareClick: () -> Unit,
 ) {
     Row(
         modifier = Modifier
@@ -163,7 +204,7 @@ private fun TopBar(
             Row(
                 verticalAlignment = Alignment.CenterVertically,
                 horizontalArrangement = Arrangement.spacedBy(4.dp),
-                modifier = Modifier.clickable { /* City selection will be added */ },
+                modifier = Modifier.clickable(onClick = onCityClick),
             ) {
                 Text(
                     text = cityName,
@@ -191,11 +232,11 @@ private fun TopBar(
         Row(horizontalArrangement = Arrangement.spacedBy(10.dp)) {
             ActionButton(
                 icon = Icons.Default.Share,
-                onClick = { /* Share action */ },
+                onClick = onShareClick,
             )
             ActionButton(
                 icon = Icons.Default.Notifications,
-                onClick = { /* Notifications */ },
+                onClick = onNotificationsClick,
             )
         }
     }

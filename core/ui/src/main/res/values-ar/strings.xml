@@ -95,6 +95,42 @@
     <string name="onboarding_notif_subtitle">لا تفوت أي صلاة</string>
     <string name="onboarding_notif_desc">احصل على إشعارات بصوت الأذان عند أوقات الصلاة. خصص لكل صلاة على حدة.</string>
 
+    <!-- Notifications -->
+    <string name="notif_title">إعدادات الإشعارات</string>
+    <string name="notif_general">عام</string>
+    <string name="notif_master">الإشعارات</string>
+    <string name="notif_master_desc">إشعارات أوقات الصلاة</string>
+    <string name="notif_vibration">الاهتزاز</string>
+    <string name="notif_full_adhan">الأذان الكامل</string>
+    <string name="notif_full_adhan_desc">تشغيل صوت الأذان الكامل مع الإشعارات</string>
+    <string name="notif_prayer_settings">إشعارات الصلاة</string>
+    <string name="notif_pre_reminder">التذكير المسبق</string>
+    <string name="notif_pre_reminder_time">وقت التذكير</string>
+    <string name="notif_pre_reminder_sound">صوت التذكير</string>
+    <string name="notif_pre_reminder_off">مغلق</string>
+    <string name="notif_pre_reminder_min">قبل %d دقائق</string>
+    <string name="notif_mode_adhan">أذان</string>
+    <string name="notif_mode_silent">صامت</string>
+    <string name="notif_mode_off">مغلق</string>
+    <string name="notif_sound_selection">اختيار صوت الأذان</string>
+    <string name="notif_sound_builtin">الأصوات المدمجة</string>
+    <string name="notif_sound_sabah">أذان الفجر</string>
+    <string name="notif_sound_ogle">أذان الظهر</string>
+    <string name="notif_sound_ikindi">أذان العصر</string>
+    <string name="notif_sound_aksam">أذان المغرب</string>
+    <string name="notif_sound_yatsi">أذان العشاء</string>
+    <string name="notif_sound_sela">صلاة</string>
+    <string name="notif_permission_denied">تم رفض إذن الإشعارات</string>
+    <string name="notif_permission_open_settings">فتح الإعدادات</string>
+
+    <!-- Shortcuts -->
+    <string name="shortcut_qibla">القبلة</string>
+    <string name="shortcut_qibla_short">القبلة</string>
+    <string name="shortcut_calendar">التقويم</string>
+    <string name="shortcut_calendar_short">التقويم</string>
+    <string name="shortcut_notifications">الإشعارات</string>
+    <string name="shortcut_notifications_short">الإشعارات</string>
+
     <!-- Calc Methods -->
     <string name="method_diyanet">ديانت</string>
     <string name="method_mwl">رابطة العالم الإسلامي</string>

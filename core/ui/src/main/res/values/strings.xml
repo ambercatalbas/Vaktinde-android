@@ -95,6 +95,42 @@
     <string name="onboarding_notif_subtitle">Hiçbir Vakti Kaçırmayın</string>
     <string name="onboarding_notif_desc">Namaz vakitlerinde ezan sesiyle bildirim alın. Her vakit için ayrı ayrı özelleştirebilirsiniz.</string>
 
+    <!-- Notifications -->
+    <string name="notif_title">Bildirim Ayarları</string>
+    <string name="notif_general">GENEL</string>
+    <string name="notif_master">Bildirimler</string>
+    <string name="notif_master_desc">Namaz vakti bildirimleri</string>
+    <string name="notif_vibration">Titreşim</string>
+    <string name="notif_full_adhan">Tam Ezan</string>
+    <string name="notif_full_adhan_desc">Bildirimlerde tam ezan sesini çal</string>
+    <string name="notif_prayer_settings">VAKIT BİLDİRİMLERİ</string>
+    <string name="notif_pre_reminder">ÖN HATIRLATMA</string>
+    <string name="notif_pre_reminder_time">Hatırlatma Süresi</string>
+    <string name="notif_pre_reminder_sound">Hatırlatma Sesi</string>
+    <string name="notif_pre_reminder_off">Kapalı</string>
+    <string name="notif_pre_reminder_min">%d dakika önce</string>
+    <string name="notif_mode_adhan">Ezan</string>
+    <string name="notif_mode_silent">Sessiz</string>
+    <string name="notif_mode_off">Kapalı</string>
+    <string name="notif_sound_selection">Ezan Sesi Seçimi</string>
+    <string name="notif_sound_builtin">HAZIR SESLER</string>
+    <string name="notif_sound_sabah">Sabah Ezanı</string>
+    <string name="notif_sound_ogle">Öğle Ezanı</string>
+    <string name="notif_sound_ikindi">İkindi Ezanı</string>
+    <string name="notif_sound_aksam">Akşam Ezanı</string>
+    <string name="notif_sound_yatsi">Yatsı Ezanı</string>
+    <string name="notif_sound_sela">Sela</string>
+    <string name="notif_permission_denied">Bildirim izni verilmedi</string>
+    <string name="notif_permission_open_settings">Ayarları Aç</string>
+
+    <!-- Shortcuts -->
+    <string name="shortcut_qibla">Kıble</string>
+    <string name="shortcut_qibla_short">Kıble</string>
+    <string name="shortcut_calendar">Takvim</string>
+    <string name="shortcut_calendar_short">Takvim</string>
+    <string name="shortcut_notifications">Bildirimler</string>
+    <string name="shortcut_notifications_short">Bildirimler</string>
+
     <!-- Calc Methods -->
     <string name="method_diyanet">Diyanet</string>
     <string name="method_mwl">MWL (Muslim World League)</string>

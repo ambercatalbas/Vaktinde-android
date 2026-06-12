@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<shortcuts xmlns:android="http://schemas.android.com/apk/res/android">
+    <shortcut
+        android:shortcutId="qibla"
+        android:enabled="true"
+        android:icon="@drawable/ic_launcher_foreground"
+        android:shortcutShortLabel="@string/shortcut_qibla_short"
+        android:shortcutLongLabel="@string/shortcut_qibla">
+        <intent
+            android:action="android.intent.action.VIEW"
+            android:targetPackage="com.ambercatalbas.vaktinde"
+            android:targetClass="com.ambercatalbas.vaktinde.MainActivity"
+            android:data="vaktinde://qibla" />
+    </shortcut>
+    <shortcut
+        android:shortcutId="calendar"
+        android:enabled="true"
+        android:icon="@drawable/ic_launcher_foreground"
+        android:shortcutShortLabel="@string/shortcut_calendar_short"
+        android:shortcutLongLabel="@string/shortcut_calendar">
+        <intent
+            android:action="android.intent.action.VIEW"
+            android:targetPackage="com.ambercatalbas.vaktinde"
+            android:targetClass="com.ambercatalbas.vaktinde.MainActivity"
+            android:data="vaktinde://calendar" />
+    </shortcut>
+    <shortcut
+        android:shortcutId="notifications"
+        android:enabled="true"
+        android:icon="@drawable/ic_launcher_foreground"
+        android:shortcutShortLabel="@string/shortcut_notifications_short"
+        android:shortcutLongLabel="@string/shortcut_notifications">
+        <intent
+            android:action="android.intent.action.VIEW"
+            android:targetPackage="com.ambercatalbas.vaktinde"
+            android:targetClass="com.ambercatalbas.vaktinde.MainActivity"
+            android:data="vaktinde://notifications" />
+    </shortcut>
+</shortcuts>

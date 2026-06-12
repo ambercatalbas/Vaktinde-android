@@ -1,5 +1,6 @@
 package com.ambercatalbas.vaktinde
 
+import android.content.Intent
 import android.content.res.Configuration
 import android.os.Bundle
 import androidx.activity.ComponentActivity
@@ -29,10 +30,18 @@ class MainActivity : ComponentActivity() {
 
             applyLocale(language)
 
+            val deepLinkRoute = parseDeepLink(intent)
+
             VaktindeTheme(themePreference = theme) {
-                VaktindeApp()
+                VaktindeApp(deepLinkRoute = deepLinkRoute)
             }
         }
+    }
+
+    private fun parseDeepLink(intent: Intent?): String? {
+        val uri = intent?.data ?: return null
+        if (uri.scheme != "vaktinde") return null
+        return uri.host // "qibla", "calendar", "notifications"
     }
 
     private fun applyLocale(language: String) {

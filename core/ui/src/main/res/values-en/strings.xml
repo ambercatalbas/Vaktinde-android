@@ -95,6 +95,42 @@
     <string name="onboarding_notif_subtitle">Never Miss a Prayer</string>
     <string name="onboarding_notif_desc">Get notified with adhan sounds at prayer times. Customize for each prayer individually.</string>
 
+    <!-- Notifications -->
+    <string name="notif_title">Notification Settings</string>
+    <string name="notif_general">GENERAL</string>
+    <string name="notif_master">Notifications</string>
+    <string name="notif_master_desc">Prayer time notifications</string>
+    <string name="notif_vibration">Vibration</string>
+    <string name="notif_full_adhan">Full Adhan</string>
+    <string name="notif_full_adhan_desc">Play full adhan sound with notifications</string>
+    <string name="notif_prayer_settings">PRAYER NOTIFICATIONS</string>
+    <string name="notif_pre_reminder">PRE-REMINDER</string>
+    <string name="notif_pre_reminder_time">Reminder Time</string>
+    <string name="notif_pre_reminder_sound">Reminder Sound</string>
+    <string name="notif_pre_reminder_off">Off</string>
+    <string name="notif_pre_reminder_min">%d minutes before</string>
+    <string name="notif_mode_adhan">Adhan</string>
+    <string name="notif_mode_silent">Silent</string>
+    <string name="notif_mode_off">Off</string>
+    <string name="notif_sound_selection">Adhan Sound Selection</string>
+    <string name="notif_sound_builtin">BUILT-IN SOUNDS</string>
+    <string name="notif_sound_sabah">Fajr Adhan</string>
+    <string name="notif_sound_ogle">Dhuhr Adhan</string>
+    <string name="notif_sound_ikindi">Asr Adhan</string>
+    <string name="notif_sound_aksam">Maghrib Adhan</string>
+    <string name="notif_sound_yatsi">Isha Adhan</string>
+    <string name="notif_sound_sela">Sela</string>
+    <string name="notif_permission_denied">Notification permission denied</string>
+    <string name="notif_permission_open_settings">Open Settings</string>
+
+    <!-- Shortcuts -->
+    <string name="shortcut_qibla">Qibla</string>
+    <string name="shortcut_qibla_short">Qibla</string>
+    <string name="shortcut_calendar">Calendar</string>
+    <string name="shortcut_calendar_short">Calendar</string>
+    <string name="shortcut_notifications">Notifications</string>
+    <string name="shortcut_notifications_short">Notifications</string>
+
     <!-- Calc Methods -->
     <string name="method_diyanet">Diyanet</string>
     <string name="method_mwl">MWL (Muslim World League)</string>

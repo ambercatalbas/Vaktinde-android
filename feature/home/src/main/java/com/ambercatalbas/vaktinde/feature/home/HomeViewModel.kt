@@ -7,6 +7,7 @@ import com.ambercatalbas.vaktinde.core.domain.model.CountdownParts
 import com.ambercatalbas.vaktinde.core.domain.model.DailyPrayers
 import com.ambercatalbas.vaktinde.core.domain.model.Prayer
 import com.ambercatalbas.vaktinde.core.domain.model.PrayerType
+import com.ambercatalbas.vaktinde.core.domain.repository.NotificationScheduler
 import com.ambercatalbas.vaktinde.core.domain.repository.PrayerTimeRepository
 import com.ambercatalbas.vaktinde.core.domain.repository.UserPreferencesRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -46,6 +47,7 @@ data class HomeUiState(
 class HomeViewModel @Inject constructor(
     private val prayerTimeRepository: PrayerTimeRepository,
     private val userPreferencesRepository: UserPreferencesRepository,
+    private val notificationScheduler: NotificationScheduler,
 ) : ViewModel() {
 
     private val _uiState = MutableStateFlow(HomeUiState())
@@ -85,6 +87,7 @@ class HomeViewModel @Inject constructor(
                     )
                 }
                 updatePrayerState()
+                notificationScheduler.scheduleToday(daily.prayers)
             }
         } catch (e: Exception) {
             _uiState.update { it.copy(isLoading = false, error = e.message) }

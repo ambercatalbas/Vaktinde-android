@@ -7,4 +7,5 @@ sealed class Route(val path: String) {
     data object Settings : Route("settings")
     data object Onboarding : Route("onboarding")
     data object CitySelection : Route("city_selection")
+    data object Notifications : Route("notifications")
 }

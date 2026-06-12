@@ -7,6 +7,7 @@ import androidx.compose.animation.fadeOut
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.hilt.navigation.compose.hiltViewModel
@@ -22,9 +23,10 @@ import com.ambercatalbas.vaktinde.feature.onboarding.OnboardingViewModel
 import com.ambercatalbas.vaktinde.feature.qibla.QiblaScreen
 import com.ambercatalbas.vaktinde.feature.settings.SettingsScreen
 import com.ambercatalbas.vaktinde.feature.settings.city.CitySelectionScreen
+import com.ambercatalbas.vaktinde.feature.settings.notifications.NotificationsScreen
 
 @Composable
-fun VaktindeApp() {
+fun VaktindeApp(deepLinkRoute: String? = null) {
     val onboardingViewModel: OnboardingViewModel = hiltViewModel()
     val hasCompletedOnboarding by onboardingViewModel.hasCompletedOnboarding.collectAsStateWithLifecycle()
 
@@ -37,6 +39,24 @@ fun VaktindeApp() {
     )
 
     val startDestination = if (hasCompletedOnboarding) Route.Home.path else Route.Onboarding.path
+
+    // Handle deep link navigation from app shortcuts
+    LaunchedEffect(deepLinkRoute) {
+        if (deepLinkRoute != null && hasCompletedOnboarding) {
+            val route = when (deepLinkRoute) {
+                "qibla" -> Route.Qibla.path
+                "calendar" -> Route.Calendar.path
+                "notifications" -> Route.Notifications.path
+                else -> null
+            }
+            if (route != null) {
+                navController.navigate(route) {
+                    popUpTo(Route.Home.path) { saveState = true }
+                    launchSingleTop = true
+                }
+            }
+        }
+    }
 
     Scaffold(
         bottomBar = {
@@ -74,7 +94,14 @@ fun VaktindeApp() {
                 )
             }
             composable(Route.Home.path) {
-                HomeScreen()
+                HomeScreen(
+                    onNavigateToCitySelection = {
+                        navController.navigate(Route.CitySelection.path)
+                    },
+                    onNavigateToNotifications = {
+                        navController.navigate(Route.Notifications.path)
+                    },
+                )
             }
             composable(Route.Qibla.path) {
                 QiblaScreen()
@@ -86,7 +113,10 @@ fun VaktindeApp() {
                 SettingsScreen(
                     onNavigateToCitySelection = {
                         navController.navigate(Route.CitySelection.path)
-                    }
+                    },
+                    onNavigateToNotifications = {
+                        navController.navigate(Route.Notifications.path)
+                    },
                 )
             }
             composable(
@@ -117,6 +147,37 @@ fun VaktindeApp() {
                 },
             ) {
                 CitySelectionScreen(
+                    onBack = { navController.popBackStack() }
+                )
+            }
+            composable(
+                Route.Notifications.path,
+                enterTransition = {
+                    slideIntoContainer(
+                        AnimatedContentTransitionScope.SlideDirection.Start,
+                        animationSpec = tween(300)
+                    )
+                },
+                exitTransition = {
+                    slideOutOfContainer(
+                        AnimatedContentTransitionScope.SlideDirection.End,
+                        animationSpec = tween(300)
+                    )
+                },
+                popEnterTransition = {
+                    slideIntoContainer(
+                        AnimatedContentTransitionScope.SlideDirection.End,
+                        animationSpec = tween(300)
+                    )
+                },
+                popExitTransition = {
+                    slideOutOfContainer(
+                        AnimatedContentTransitionScope.SlideDirection.End,
+                        animationSpec = tween(300)
+                    )
+                },
+            ) {
+                NotificationsScreen(
                     onBack = { navController.popBackStack() }
                 )
             }

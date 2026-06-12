@@ -57,6 +57,7 @@ import com.ambercatalbas.vaktinde.core.ui.theme.Gold
 @Composable
 fun SettingsScreen(
     onNavigateToCitySelection: () -> Unit = {},
+    onNavigateToNotifications: () -> Unit = {},
     viewModel: SettingsViewModel = hiltViewModel(),
 ) {
     val state by viewModel.uiState.collectAsStateWithLifecycle()
@@ -124,13 +125,7 @@ fun SettingsScreen(
                 icon = Icons.Default.Notifications,
                 title = stringResource(R.string.settings_notification_settings),
                 detail = stringResource(R.string.settings_customize),
-                onClick = {
-                    val intent = Intent().apply {
-                        action = "android.settings.APP_NOTIFICATION_SETTINGS"
-                        putExtra("android.provider.extra.APP_PACKAGE", context.packageName)
-                    }
-                    context.startActivity(intent)
-                },
+                onClick = onNavigateToNotifications,
                 showDivider = false,
             )
         }
