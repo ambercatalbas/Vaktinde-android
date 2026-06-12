@@ -17,9 +17,11 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.ambercatalbas.vaktinde.core.ui.R
 import com.ambercatalbas.vaktinde.core.ui.theme.Dimens
 
 @Composable
@@ -44,7 +46,7 @@ fun HijriDateRow(
             modifier = Modifier.size(19.dp),
         )
         Text(
-            text = "HİCRİ TAKVİM",
+            text = stringResource(R.string.home_hijri_calendar),
             color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.6f),
             fontSize = 14.5.sp,
             modifier = Modifier.weight(1f),

@@ -38,9 +38,11 @@ import androidx.compose.ui.graphics.drawscope.Fill
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.ambercatalbas.vaktinde.core.ui.R
 import com.ambercatalbas.vaktinde.core.ui.theme.Gold
 import com.ambercatalbas.vaktinde.core.ui.theme.GoldDeep
 import com.ambercatalbas.vaktinde.core.ui.theme.GoldSoft
@@ -58,24 +60,25 @@ data class OnboardingPage(
     val description: String,
 )
 
-private val pages = listOf(
+@Composable
+private fun pages() = listOf(
     OnboardingPage(
         icon = Icons.Default.Nightlight,
-        title = "Vaktinde",
-        subtitle = "Namaz Vakitleri",
-        description = "Namaz vakitlerini takip edin, Kıble yönünü bulun ve günlük ibadetlerinizi düzenleyin.",
+        title = stringResource(R.string.onboarding_welcome_title),
+        subtitle = stringResource(R.string.onboarding_welcome_subtitle),
+        description = stringResource(R.string.onboarding_welcome_desc),
     ),
     OnboardingPage(
         icon = Icons.Default.LocationOn,
-        title = "Konum İzni",
-        subtitle = "Doğru Vakitler İçin",
-        description = "Bulunduğunuz konuma göre en doğru namaz vakitlerini gösterebilmemiz için konum izni gereklidir.",
+        title = stringResource(R.string.onboarding_location_title),
+        subtitle = stringResource(R.string.onboarding_location_subtitle),
+        description = stringResource(R.string.onboarding_location_desc),
     ),
     OnboardingPage(
         icon = Icons.Default.Notifications,
-        title = "Bildirimler",
-        subtitle = "Hiçbir Vakti Kaçırmayın",
-        description = "Namaz vakitlerinde ezan sesiyle bildirim alın. Her vakit için ayrı ayrı özelleştirebilirsiniz.",
+        title = stringResource(R.string.onboarding_notif_title),
+        subtitle = stringResource(R.string.onboarding_notif_subtitle),
+        description = stringResource(R.string.onboarding_notif_desc),
     ),
 )
 
@@ -83,6 +86,7 @@ private val pages = listOf(
 fun OnboardingScreen(
     onComplete: () -> Unit,
 ) {
+    val pages = pages()
     val pagerState = rememberPagerState(pageCount = { pages.size })
     val scope = rememberCoroutineScope()
 
@@ -123,7 +127,7 @@ fun OnboardingScreen(
                 if (pagerState.currentPage < pages.size - 1) {
                     TextButton(onClick = onComplete) {
                         Text(
-                            text = "Atla",
+                            text = stringResource(R.string.skip),
                             color = TextDim.copy(alpha = 0.6f),
                             fontSize = 15.sp,
                         )
@@ -184,7 +188,7 @@ fun OnboardingScreen(
                 ),
             ) {
                 Text(
-                    text = if (isLastPage) "Başla" else "Devam",
+                    text = if (isLastPage) stringResource(R.string.start) else stringResource(R.string.continue_text),
                     fontSize = 17.sp,
                     fontWeight = FontWeight.SemiBold,
                 )

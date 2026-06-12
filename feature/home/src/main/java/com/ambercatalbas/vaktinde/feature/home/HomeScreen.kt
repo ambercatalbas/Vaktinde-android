@@ -29,11 +29,13 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import com.ambercatalbas.vaktinde.core.ui.R
 import com.ambercatalbas.vaktinde.core.ui.theme.Dimens
 import com.ambercatalbas.vaktinde.feature.home.components.HeroCountdownCard
 import com.ambercatalbas.vaktinde.feature.home.components.HijriDateRow
@@ -97,7 +99,7 @@ fun HomeScreen(
 
         // Prayer list header
         Text(
-            text = "BUGÜNÜN NAMAZLARI",
+            text = stringResource(R.string.home_todays_prayers),
             color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.4f),
             fontSize = 12.sp,
             fontWeight = FontWeight.SemiBold,
@@ -171,7 +173,7 @@ private fun TopBar(
                 )
                 Icon(
                     imageVector = Icons.Default.KeyboardArrowDown,
-                    contentDescription = "Şehir seç",
+                    contentDescription = stringResource(R.string.settings_city),
                     tint = MaterialTheme.colorScheme.onBackground,
                     modifier = Modifier.size(20.dp),
                 )

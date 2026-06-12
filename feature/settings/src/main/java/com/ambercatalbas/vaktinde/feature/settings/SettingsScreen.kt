@@ -38,12 +38,14 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.ambercatalbas.vaktinde.core.domain.model.CalcMethod
+import com.ambercatalbas.vaktinde.core.ui.R
 import com.ambercatalbas.vaktinde.core.ui.theme.Dimens
 import com.ambercatalbas.vaktinde.core.ui.theme.Gold
 
@@ -69,23 +71,23 @@ fun SettingsScreen(
         Spacer(modifier = Modifier.height(14.dp))
 
         // Preferences section
-        SectionHeader("TERCİHLER")
+        SectionHeader(stringResource(R.string.settings_preferences))
         SettingsCard {
             SettingsRow(
                 icon = Icons.Default.Language,
-                title = "Dil",
+                title = stringResource(R.string.settings_language),
                 detail = viewModel.languageDisplayName,
                 onClick = { viewModel.showLanguageDialog(true) },
             )
             SettingsRow(
                 icon = Icons.Default.DarkMode,
-                title = "Tema",
+                title = stringResource(R.string.settings_theme),
                 detail = viewModel.themeDisplayName,
                 onClick = { viewModel.showThemeDialog(true) },
             )
             SettingsRow(
                 icon = Icons.Default.Explore,
-                title = "Hesaplama Metodu",
+                title = stringResource(R.string.settings_calc_method),
                 detail = viewModel.methodDisplayName,
                 onClick = { viewModel.showMethodDialog(true) },
                 showDivider = false,
@@ -95,11 +97,11 @@ fun SettingsScreen(
         Spacer(modifier = Modifier.height(14.dp))
 
         // Location section
-        SectionHeader("KONUM")
+        SectionHeader(stringResource(R.string.settings_location))
         SettingsCard {
             SettingsRow(
                 icon = Icons.Default.LocationOn,
-                title = "Şehir",
+                title = stringResource(R.string.settings_city),
                 detail = state.cityName,
                 onClick = onNavigateToCitySelection,
                 showDivider = false,
@@ -109,12 +111,12 @@ fun SettingsScreen(
         Spacer(modifier = Modifier.height(14.dp))
 
         // Notifications section
-        SectionHeader("BİLDİRİMLER")
+        SectionHeader(stringResource(R.string.settings_notifications))
         SettingsCard {
             SettingsRow(
                 icon = Icons.Default.Notifications,
-                title = "Bildirim Ayarları",
-                detail = "Özelleştir",
+                title = stringResource(R.string.settings_notification_settings),
+                detail = stringResource(R.string.settings_customize),
                 onClick = { /* Notification settings */ },
                 showDivider = false,
             )
@@ -123,16 +125,16 @@ fun SettingsScreen(
         Spacer(modifier = Modifier.height(14.dp))
 
         // About section
-        SectionHeader("HAKKINDA")
+        SectionHeader(stringResource(R.string.settings_about))
         SettingsCard {
             SettingsRow(
                 icon = Icons.Default.Info,
-                title = "Vaktinde Hakkında",
+                title = stringResource(R.string.settings_about_app),
                 onClick = {},
             )
             SettingsRow(
                 icon = Icons.Default.Share,
-                title = "Uygulamayı Paylaş",
+                title = stringResource(R.string.settings_share),
                 onClick = {},
                 showDivider = false,
             )

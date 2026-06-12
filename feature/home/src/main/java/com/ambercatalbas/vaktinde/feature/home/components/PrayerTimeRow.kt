@@ -18,11 +18,13 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.ambercatalbas.vaktinde.core.domain.model.Prayer
+import com.ambercatalbas.vaktinde.core.ui.R
 import com.ambercatalbas.vaktinde.core.ui.theme.Gold
 import com.ambercatalbas.vaktinde.core.ui.theme.GoldSoft
 
@@ -112,7 +114,7 @@ fun PrayerTimeRow(
         // Badge (only for NEXT)
         if (state == PrayerRowState.NEXT) {
             Text(
-                text = "SONRAKİ",
+                text = stringResource(R.string.home_next_badge),
                 color = GoldSoft,
                 fontSize = 10.5.sp,
                 fontWeight = FontWeight.Bold,
@@ -133,11 +135,12 @@ fun PrayerTimeRow(
     }
 }
 
+@Composable
 private fun prayerSubtitle(type: com.ambercatalbas.vaktinde.core.domain.model.PrayerType): String = when (type) {
-    com.ambercatalbas.vaktinde.core.domain.model.PrayerType.IMSAK -> "Fajr"
-    com.ambercatalbas.vaktinde.core.domain.model.PrayerType.GUNES -> "Sunrise"
-    com.ambercatalbas.vaktinde.core.domain.model.PrayerType.OGLE -> "Dhuhr"
-    com.ambercatalbas.vaktinde.core.domain.model.PrayerType.IKINDI -> "Asr"
-    com.ambercatalbas.vaktinde.core.domain.model.PrayerType.AKSAM -> "Maghrib"
-    com.ambercatalbas.vaktinde.core.domain.model.PrayerType.YATSI -> "Isha"
+    com.ambercatalbas.vaktinde.core.domain.model.PrayerType.IMSAK -> stringResource(R.string.prayer_sub_imsak)
+    com.ambercatalbas.vaktinde.core.domain.model.PrayerType.GUNES -> stringResource(R.string.prayer_sub_gunes)
+    com.ambercatalbas.vaktinde.core.domain.model.PrayerType.OGLE -> stringResource(R.string.prayer_sub_ogle)
+    com.ambercatalbas.vaktinde.core.domain.model.PrayerType.IKINDI -> stringResource(R.string.prayer_sub_ikindi)
+    com.ambercatalbas.vaktinde.core.domain.model.PrayerType.AKSAM -> stringResource(R.string.prayer_sub_aksam)
+    com.ambercatalbas.vaktinde.core.domain.model.PrayerType.YATSI -> stringResource(R.string.prayer_sub_yatsi)
 }

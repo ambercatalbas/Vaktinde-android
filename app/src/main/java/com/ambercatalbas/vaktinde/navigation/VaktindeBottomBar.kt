@@ -24,13 +24,15 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.ambercatalbas.vaktinde.R
 
 data class BottomNavItem(
     val route: String,
-    val label: String,
+    val labelResId: Int,
     val icon: ImageVector,
 )
 
@@ -40,10 +42,10 @@ fun VaktindeBottomBar(
     onNavigate: (String) -> Unit,
 ) {
     val items = listOf(
-        BottomNavItem(Route.Home.path, "Vakitler", Icons.Default.Home),
-        BottomNavItem(Route.Qibla.path, "Kıble", Icons.Default.Explore),
-        BottomNavItem(Route.Calendar.path, "Takvim", Icons.Default.CalendarMonth),
-        BottomNavItem(Route.Settings.path, "Ayarlar", Icons.Default.Settings),
+        BottomNavItem(Route.Home.path, R.string.tab_home, Icons.Default.Home),
+        BottomNavItem(Route.Qibla.path, R.string.tab_qibla, Icons.Default.Explore),
+        BottomNavItem(Route.Calendar.path, R.string.tab_calendar, Icons.Default.CalendarMonth),
+        BottomNavItem(Route.Settings.path, R.string.tab_settings, Icons.Default.Settings),
     )
 
     Box(
@@ -68,6 +70,7 @@ fun VaktindeBottomBar(
                 } else {
                     MaterialTheme.colorScheme.onSurface.copy(alpha = 0.5f)
                 }
+                val label = stringResource(item.labelResId)
 
                 Column(
                     modifier = Modifier
@@ -78,12 +81,12 @@ fun VaktindeBottomBar(
                 ) {
                     Icon(
                         imageVector = item.icon,
-                        contentDescription = item.label,
+                        contentDescription = label,
                         tint = contentColor,
                         modifier = Modifier.size(24.dp)
                     )
                     Text(
-                        text = item.label,
+                        text = label,
                         color = contentColor,
                         fontSize = 11.sp,
                         fontWeight = if (isSelected) FontWeight.SemiBold else FontWeight.Normal

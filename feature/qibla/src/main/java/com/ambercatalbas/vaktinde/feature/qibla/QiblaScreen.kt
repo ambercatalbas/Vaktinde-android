@@ -40,11 +40,13 @@ import androidx.compose.ui.graphics.drawscope.rotate
 import androidx.compose.ui.graphics.nativeCanvas
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import com.ambercatalbas.vaktinde.core.ui.R
 import com.ambercatalbas.vaktinde.core.ui.theme.Dimens
 import com.ambercatalbas.vaktinde.core.ui.theme.Gold
 import com.ambercatalbas.vaktinde.core.ui.theme.GoldSoft
@@ -75,7 +77,7 @@ fun QiblaScreen(
 
         // Header
         Text(
-            text = "Kıble",
+            text = stringResource(R.string.qibla_title),
             style = MaterialTheme.typography.headlineSmall,
             color = MaterialTheme.colorScheme.onBackground,
         )
@@ -108,7 +110,7 @@ fun QiblaScreen(
                     fontWeight = FontWeight.Bold,
                 )
                 Text(
-                    text = "Kıble Açısı",
+                    text = stringResource(R.string.qibla_angle),
                     color = Color.White.copy(alpha = 0.5f),
                     fontSize = 12.sp,
                 )
@@ -119,7 +121,7 @@ fun QiblaScreen(
 
         // Hint text
         Text(
-            text = if (state.isAligned) "Kıble yönündesiniz" else "Cihazı Kıble yönüne çevirin",
+            text = if (state.isAligned) stringResource(R.string.qibla_aligned_hint) else stringResource(R.string.qibla_turn_hint),
             color = if (state.isAligned) Gold else MaterialTheme.colorScheme.onSurface.copy(alpha = 0.5f),
             fontSize = 14.sp,
         )
@@ -134,19 +136,19 @@ fun QiblaScreen(
             InfoCard(
                 icon = Icons.Default.LocationOn,
                 value = state.cityName,
-                label = "Konum",
+                label = stringResource(R.string.qibla_location),
                 modifier = Modifier.weight(1f),
             )
             InfoCard(
                 icon = Icons.Default.Navigation,
                 value = state.bearingText,
-                label = "Yön",
+                label = stringResource(R.string.qibla_direction),
                 modifier = Modifier.weight(1f),
             )
             InfoCard(
                 icon = Icons.Default.Straighten,
                 value = state.distanceKm,
-                label = "Mesafe",
+                label = stringResource(R.string.qibla_distance),
                 modifier = Modifier.weight(1f),
             )
         }
@@ -173,7 +175,7 @@ private fun StatusPill(isAligned: Boolean) {
             drawCircle(color = dotColor)
         }
         Text(
-            text = if (isAligned) "Hizalı" else "Döndür",
+            text = if (isAligned) stringResource(R.string.qibla_aligned) else stringResource(R.string.qibla_turn),
             color = textColor,
             fontSize = 14.sp,
             fontWeight = FontWeight.SemiBold,
