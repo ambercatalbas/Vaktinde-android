@@ -18,6 +18,7 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.DarkMode
 import androidx.compose.material.icons.filled.LightMode
 import androidx.compose.material.icons.filled.Nightlight
+import androidx.compose.ui.res.painterResource
 import androidx.compose.material.icons.filled.WbSunny
 import androidx.compose.material.icons.filled.WbTwilight
 import androidx.compose.material3.Icon
@@ -120,16 +121,15 @@ fun HeroCountdownCard(
             }
         }
 
-        // Crescent moon (top-right, rotated 45° to face upward)
+        // Crescent moon (top-right)
         Icon(
-            imageVector = Icons.Default.Nightlight,
+            painter = painterResource(id = com.ambercatalbas.vaktinde.core.ui.R.drawable.ic_crescent_moon),
             contentDescription = null,
             tint = GoldAccent.copy(alpha = 0.3f),
             modifier = Modifier
                 .align(Alignment.TopEnd)
                 .padding(top = 4.dp, end = 14.dp)
                 .size(120.dp)
-                .graphicsLayer { rotationZ = -45f }
         )
 
         // Content

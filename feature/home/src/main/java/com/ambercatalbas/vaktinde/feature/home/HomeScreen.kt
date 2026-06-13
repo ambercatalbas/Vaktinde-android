@@ -41,6 +41,7 @@ import com.ambercatalbas.vaktinde.core.domain.model.PrayerType
 import com.ambercatalbas.vaktinde.core.ui.R
 import com.ambercatalbas.vaktinde.core.ui.theme.Dimens
 import com.ambercatalbas.vaktinde.feature.home.components.HeroCountdownCard
+import com.ambercatalbas.vaktinde.feature.home.components.MiniQiblaCompass
 import com.ambercatalbas.vaktinde.feature.home.components.HijriDateRow
 import com.ambercatalbas.vaktinde.feature.home.components.PrayerRowState
 import com.ambercatalbas.vaktinde.feature.home.components.PrayerTimeRow
@@ -74,6 +75,7 @@ fun HomeScreen(
         TopBar(
             cityName = state.cityName,
             gregorianDate = state.gregorianDate,
+            qiblaBearing = state.qiblaBearing,
             onCityClick = onNavigateToCitySelection,
             onNotificationsClick = onNavigateToNotifications,
             onShareClick = {
@@ -189,6 +191,7 @@ fun HomeScreen(
 private fun TopBar(
     cityName: String,
     gregorianDate: String,
+    qiblaBearing: Double,
     onCityClick: () -> Unit,
     onNotificationsClick: () -> Unit,
     onShareClick: () -> Unit,
@@ -199,32 +202,40 @@ private fun TopBar(
             .padding(horizontal = Dimens.StandardPadding, vertical = 12.dp),
         verticalAlignment = Alignment.CenterVertically,
     ) {
-        // Left: City and date
-        Column(modifier = Modifier.weight(1f)) {
-            Row(
-                verticalAlignment = Alignment.CenterVertically,
-                horizontalArrangement = Arrangement.spacedBy(4.dp),
-                modifier = Modifier.clickable(onClick = onCityClick),
-            ) {
-                Text(
-                    text = cityName,
-                    color = MaterialTheme.colorScheme.onBackground,
-                    fontSize = 19.sp,
-                    fontWeight = FontWeight.SemiBold,
-                )
-                Icon(
-                    imageVector = Icons.Default.KeyboardArrowDown,
-                    contentDescription = stringResource(R.string.settings_city),
-                    tint = MaterialTheme.colorScheme.onBackground,
-                    modifier = Modifier.size(20.dp),
-                )
-            }
-            if (gregorianDate.isNotEmpty()) {
-                Text(
-                    text = gregorianDate,
-                    color = MaterialTheme.colorScheme.onBackground.copy(alpha = 0.5f),
-                    fontSize = 13.sp,
-                )
+        // Left: Mini Qibla + City and date
+        Row(
+            modifier = Modifier.weight(1f),
+            verticalAlignment = Alignment.CenterVertically,
+            horizontalArrangement = Arrangement.spacedBy(10.dp),
+        ) {
+            MiniQiblaCompass(qiblaBearing = qiblaBearing)
+
+            Column {
+                Row(
+                    verticalAlignment = Alignment.CenterVertically,
+                    horizontalArrangement = Arrangement.spacedBy(4.dp),
+                    modifier = Modifier.clickable(onClick = onCityClick),
+                ) {
+                    Text(
+                        text = cityName,
+                        color = MaterialTheme.colorScheme.onBackground,
+                        fontSize = 19.sp,
+                        fontWeight = FontWeight.SemiBold,
+                    )
+                    Icon(
+                        imageVector = Icons.Default.KeyboardArrowDown,
+                        contentDescription = stringResource(R.string.settings_city),
+                        tint = MaterialTheme.colorScheme.onBackground,
+                        modifier = Modifier.size(20.dp),
+                    )
+                }
+                if (gregorianDate.isNotEmpty()) {
+                    Text(
+                        text = gregorianDate,
+                        color = MaterialTheme.colorScheme.onBackground.copy(alpha = 0.5f),
+                        fontSize = 13.sp,
+                    )
+                }
             }
         }
 

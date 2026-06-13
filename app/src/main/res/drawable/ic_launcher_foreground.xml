@@ -4,10 +4,33 @@
     android:height="108dp"
     android:viewportWidth="108"
     android:viewportHeight="108">
+
+    <!-- Stars -->
+    <path android:fillColor="#FFFFFF" android:fillAlpha="0.3"
+        android:pathData="M35,32m-1,0a1,1 0,1,1 2,0a1,1 0,1,1 -2,0" />
+    <path android:fillColor="#FFFFFF" android:fillAlpha="0.25"
+        android:pathData="M72,28m-0.8,0a0.8,0.8 0,1,1 1.6,0a0.8,0.8 0,1,1 -1.6,0" />
+    <path android:fillColor="#FFFFFF" android:fillAlpha="0.35"
+        android:pathData="M28,50m-0.7,0a0.7,0.7 0,1,1 1.4,0a0.7,0.7 0,1,1 -1.4,0" />
+    <path android:fillColor="#FFFFFF" android:fillAlpha="0.2"
+        android:pathData="M80,42m-0.6,0a0.6,0.6 0,1,1 1.2,0a0.6,0.6 0,1,1 -1.2,0" />
+    <path android:fillColor="#FFFFFF" android:fillAlpha="0.3"
+        android:pathData="M42,72m-0.8,0a0.8,0.8 0,1,1 1.6,0a0.8,0.8 0,1,1 -1.6,0" />
+    <path android:fillColor="#FFFFFF" android:fillAlpha="0.2"
+        android:pathData="M68,65m-0.5,0a0.5,0.5 0,1,1 1,0a0.5,0.5 0,1,1 -1,0" />
+    <path android:fillColor="#FFFFFF" android:fillAlpha="0.25"
+        android:pathData="M30,38m-0.5,0a0.5,0.5 0,1,1 1,0a0.5,0.5 0,1,1 -1,0" />
+    <path android:fillColor="#FFFFFF" android:fillAlpha="0.15"
+        android:pathData="M76,56m-0.6,0a0.6,0.6 0,1,1 1.2,0a0.6,0.6 0,1,1 -1.2,0" />
+
+    <!-- Crescent moon glow -->
     <path
         android:fillColor="#D4A44A"
-        android:pathData="M54,54m-30,0a30,30 0,1 1,60 0a30,30 0,1 1,-60 0" />
+        android:fillAlpha="0.12"
+        android:pathData="M54,54m-34,0a34,34 0,1,1 68,0a34,34 0,1,1 -68,0" />
+
+    <!-- Thin crescent moon -->
     <path
-        android:fillColor="#FFFFFF"
-        android:pathData="M54,32 C42.95,32 34,40.95 34,52 C34,56.4 35.6,60.4 38.2,63.5 L54,72 L69.8,63.5 C72.4,60.4 74,56.4 74,52 C74,40.95 65.05,32 54,32 Z M54,62 C48.48,62 44,57.52 44,52 C44,46.48 48.48,42 54,42 C59.52,42 64,46.48 64,52 C64,57.52 59.52,62 54,62 Z" />
+        android:fillColor="#D4A44A"
+        android:pathData="M59,24 A32,32 0,1,0 59,84 A30,30 0,0,1 59,24 Z" />
 </vector>

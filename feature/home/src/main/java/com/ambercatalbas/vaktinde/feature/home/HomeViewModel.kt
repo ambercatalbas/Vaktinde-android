@@ -27,6 +27,9 @@ import java.time.format.DateTimeFormatter
 import java.time.temporal.ChronoField
 import java.util.Locale
 import javax.inject.Inject
+import kotlin.math.atan2
+import kotlin.math.cos
+import kotlin.math.sin
 
 data class HomeUiState(
     val dailyPrayers: DailyPrayers? = null,
@@ -39,6 +42,7 @@ data class HomeUiState(
     val hijriDate: String = "",
     val gregorianDate: String = "",
     val cityName: String = "İstanbul",
+    val qiblaBearing: Double = 0.0,
     val isLoading: Boolean = true,
     val error: String? = null,
 )
@@ -64,7 +68,8 @@ class HomeViewModel @Inject constructor(
     private fun observeCity() {
         viewModelScope.launch {
             selectedCity.collectLatest { city ->
-                _uiState.update { it.copy(cityName = city.name, isLoading = true) }
+                val bearing = calculateQiblaBearing(city.latitude, city.longitude)
+                _uiState.update { it.copy(cityName = city.name, qiblaBearing = bearing, isLoading = true) }
                 loadPrayers(city)
             }
         }
@@ -183,6 +188,17 @@ class HomeViewModel @Inject constructor(
         } catch (_: Exception) {
             ""
         }
+    }
+
+    private fun calculateQiblaBearing(lat: Double, lng: Double): Double {
+        val lat1 = Math.toRadians(lat)
+        val lng1 = Math.toRadians(lng)
+        val lat2 = Math.toRadians(21.4225) // Kaaba latitude
+        val lng2 = Math.toRadians(39.8262) // Kaaba longitude
+        val dLng = lng2 - lng1
+        val y = sin(dLng) * cos(lat2)
+        val x = cos(lat1) * sin(lat2) - sin(lat1) * cos(lat2) * cos(dLng)
+        return (Math.toDegrees(atan2(y, x)) + 360) % 360
     }
 
     fun refresh() {

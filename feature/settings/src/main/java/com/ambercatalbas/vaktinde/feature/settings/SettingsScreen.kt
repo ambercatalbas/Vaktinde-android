@@ -20,6 +20,7 @@ import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.KeyboardArrowRight
 import androidx.compose.material.icons.filled.DarkMode
+import androidx.compose.ui.res.painterResource
 import androidx.compose.material.icons.filled.Explore
 import androidx.compose.material.icons.filled.Info
 import androidx.compose.material.icons.filled.Language
@@ -258,7 +259,7 @@ private fun BrandCard() {
     ) {
         Row(verticalAlignment = Alignment.CenterVertically) {
             Icon(
-                imageVector = Icons.Default.DarkMode,
+                painter = painterResource(id = com.ambercatalbas.vaktinde.core.ui.R.drawable.ic_crescent_moon),
                 contentDescription = null,
                 tint = Gold,
                 modifier = Modifier.size(52.dp),
