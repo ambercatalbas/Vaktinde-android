@@ -1,41 +1,56 @@
 <?xml version="1.0" encoding="utf-8"?>
 <vector xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:aapt="http://schemas.android.com/aapt"
     android:width="108dp"
     android:height="108dp"
     android:viewportWidth="108"
     android:viewportHeight="108">
 
-    <!-- Stars -->
-    <path android:fillColor="#FFFFFF" android:fillAlpha="0.3"
-        android:pathData="M35,32m-1,0a1,1 0,1,1 2,0a1,1 0,1,1 -2,0" />
-    <path android:fillColor="#FFFFFF" android:fillAlpha="0.25"
-        android:pathData="M72,28m-0.8,0a0.8,0.8 0,1,1 1.6,0a0.8,0.8 0,1,1 -1.6,0" />
+    <!-- Stars (12 stars, top 64% of icon) -->
     <path android:fillColor="#FFFFFF" android:fillAlpha="0.35"
-        android:pathData="M28,50m-0.7,0a0.7,0.7 0,1,1 1.4,0a0.7,0.7 0,1,1 -1.4,0" />
+        android:pathData="M34,30m-1.1,0a1.1,1.1 0,1,1 2.2,0a1.1,1.1 0,1,1 -2.2,0" />
+    <path android:fillColor="#FFFFFF" android:fillAlpha="0.28"
+        android:pathData="M71,26m-0.9,0a0.9,0.9 0,1,1 1.8,0a0.9,0.9 0,1,1 -1.8,0" />
+    <path android:fillColor="#FFFFFF" android:fillAlpha="0.4"
+        android:pathData="M26,48m-0.7,0a0.7,0.7 0,1,1 1.4,0a0.7,0.7 0,1,1 -1.4,0" />
+    <path android:fillColor="#FFFFFF" android:fillAlpha="0.22"
+        android:pathData="M82,40m-0.6,0a0.6,0.6 0,1,1 1.2,0a0.6,0.6 0,1,1 -1.2,0" />
+    <path android:fillColor="#FFFFFF" android:fillAlpha="0.32"
+        android:pathData="M40,22m-0.8,0a0.8,0.8 0,1,1 1.6,0a0.8,0.8 0,1,1 -1.6,0" />
     <path android:fillColor="#FFFFFF" android:fillAlpha="0.2"
-        android:pathData="M80,42m-0.6,0a0.6,0.6 0,1,1 1.2,0a0.6,0.6 0,1,1 -1.2,0" />
-    <path android:fillColor="#FFFFFF" android:fillAlpha="0.3"
-        android:pathData="M42,72m-0.8,0a0.8,0.8 0,1,1 1.6,0a0.8,0.8 0,1,1 -1.6,0" />
-    <path android:fillColor="#FFFFFF" android:fillAlpha="0.2"
-        android:pathData="M68,65m-0.5,0a0.5,0.5 0,1,1 1,0a0.5,0.5 0,1,1 -1,0" />
+        android:pathData="M64,34m-0.5,0a0.5,0.5 0,1,1 1,0a0.5,0.5 0,1,1 -1,0" />
     <path android:fillColor="#FFFFFF" android:fillAlpha="0.25"
-        android:pathData="M30,38m-0.5,0a0.5,0.5 0,1,1 1,0a0.5,0.5 0,1,1 -1,0" />
+        android:pathData="M30,36m-0.5,0a0.5,0.5 0,1,1 1,0a0.5,0.5 0,1,1 -1,0" />
+    <path android:fillColor="#FFFFFF" android:fillAlpha="0.18"
+        android:pathData="M78,54m-0.6,0a0.6,0.6 0,1,1 1.2,0a0.6,0.6 0,1,1 -1.2,0" />
+    <path android:fillColor="#FFFFFF" android:fillAlpha="0.3"
+        android:pathData="M48,42m-0.7,0a0.7,0.7 0,1,1 1.4,0a0.7,0.7 0,1,1 -1.4,0" />
+    <path android:fillColor="#FFFFFF" android:fillAlpha="0.24"
+        android:pathData="M58,20m-0.6,0a0.6,0.6 0,1,1 1.2,0a0.6,0.6 0,1,1 -1.2,0" />
     <path android:fillColor="#FFFFFF" android:fillAlpha="0.15"
-        android:pathData="M76,56m-0.6,0a0.6,0.6 0,1,1 1.2,0a0.6,0.6 0,1,1 -1.2,0" />
+        android:pathData="M44,60m-0.5,0a0.5,0.5 0,1,1 1,0a0.5,0.5 0,1,1 -1,0" />
+    <path android:fillColor="#FFFFFF" android:fillAlpha="0.27"
+        android:pathData="M74,50m-0.8,0a0.8,0.8 0,1,1 1.6,0a0.8,0.8 0,1,1 -1.6,0" />
 
-    <!-- Crescent moon glow -->
+    <!-- Crescent moon glow (soft gold circle behind crescent) -->
     <path
         android:fillColor="#E0B86A"
-        android:fillAlpha="0.12"
-        android:pathData="M54,54m-34,0a34,34 0,1,1 68,0a34,34 0,1,1 -68,0" />
+        android:fillAlpha="0.16"
+        android:pathData="M54,54m-24,0a24,24 0,1,1 48,0a24,24 0,1,1 -48,0" />
 
-    <!-- Crescent moon, rotated -45 degrees -->
-    <group
-        android:pivotX="54"
-        android:pivotY="54"
-        android:rotation="-45">
-        <path
-            android:fillColor="#E0B86A"
-            android:pathData="M58,24 A32,32 0,1,0 58,84 A24,24 0,0,1 58,24 Z" />
-    </group>
+    <!-- Crescent moon: two-circle mask method as path -->
+    <!-- Main circle cx=50,cy=50,r=40 minus cut circle cx=67,cy=39,r=34 -->
+    <!-- Scaled to 108dp: 52% size centered -->
+    <!-- P2(53.6,31.5) outer-arc(r=22.5) P1(74.3,63.6) inner-arc(r=19.1) back -->
+    <path android:pathData="M53.6,31.5 A22.5,22.5,0,1,0,74.3,63.6 A19.1,19.1,0,0,1,53.6,31.5 Z">
+        <aapt:attr name="android:fillColor">
+            <gradient
+                android:type="radial"
+                android:centerX="49.5"
+                android:centerY="48.5"
+                android:gradientRadius="24"
+                android:startColor="#f6e0ac"
+                android:endColor="#c2913f" />
+        </aapt:attr>
+    </path>
 </vector>
