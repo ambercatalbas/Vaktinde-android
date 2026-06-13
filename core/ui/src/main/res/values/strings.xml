@@ -38,7 +38,7 @@
     <string name="home_minutes">dakika</string>
 
     <!-- Tabs -->
-    <string name="tab_home">Vakitler</string>
+    <string name="tab_home">Anasayfa</string>
     <string name="tab_qibla">Kıble</string>
     <string name="tab_calendar">Takvim</string>
     <string name="tab_settings">Ayarlar</string>
@@ -71,6 +71,8 @@
     <string name="settings_about">HAKKINDA</string>
     <string name="settings_about_app">Vaktinde Hakkında</string>
     <string name="settings_share">Uygulamayı Paylaş</string>
+    <string name="settings_privacy">Gizlilik Politikası</string>
+    <string name="settings_brand_tagline">Sürüm 1.0 · Huzurla, vaktinde</string>
 
     <!-- Themes -->
     <string name="theme_dark">Koyu</string>

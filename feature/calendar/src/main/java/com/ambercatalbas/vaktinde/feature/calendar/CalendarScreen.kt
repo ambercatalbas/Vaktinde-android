@@ -22,11 +22,11 @@ import androidx.compose.material.icons.automirrored.filled.KeyboardArrowLeft
 import androidx.compose.material.icons.automirrored.filled.KeyboardArrowRight
 import androidx.compose.material.icons.filled.DarkMode
 import androidx.compose.material.icons.filled.LightMode
+import androidx.compose.material.icons.filled.LocationOn
 import androidx.compose.material.icons.filled.Nightlight
 import androidx.compose.material.icons.filled.WbSunny
 import androidx.compose.material.icons.filled.WbTwilight
 import androidx.compose.material3.CircularProgressIndicator
-import androidx.compose.material3.Divider
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
@@ -37,8 +37,10 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
@@ -71,13 +73,43 @@ fun CalendarScreen(
     ) {
         Spacer(modifier = Modifier.height(16.dp))
 
-        // Header
-        Text(
-            text = stringResource(R.string.calendar_title),
-            style = MaterialTheme.typography.headlineSmall,
-            color = MaterialTheme.colorScheme.onBackground,
-            modifier = Modifier.padding(horizontal = Dimens.StandardPadding),
-        )
+        // Header row with title and city chip
+        Row(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(horizontal = Dimens.StandardPadding),
+            verticalAlignment = Alignment.CenterVertically,
+        ) {
+            Text(
+                text = stringResource(R.string.calendar_title),
+                style = MaterialTheme.typography.headlineSmall,
+                color = MaterialTheme.colorScheme.onBackground,
+                modifier = Modifier.weight(1f),
+            )
+            // City chip
+            Row(
+                modifier = Modifier
+                    .clip(RoundedCornerShape(20.dp))
+                    .background(MaterialTheme.colorScheme.surface)
+                    .border(1.dp, MaterialTheme.colorScheme.outline, RoundedCornerShape(20.dp))
+                    .padding(horizontal = 10.dp, vertical = 6.dp),
+                verticalAlignment = Alignment.CenterVertically,
+                horizontalArrangement = Arrangement.spacedBy(4.dp),
+            ) {
+                Icon(
+                    imageVector = Icons.Default.LocationOn,
+                    contentDescription = null,
+                    tint = Gold,
+                    modifier = Modifier.size(14.dp),
+                )
+                Text(
+                    text = state.cityName,
+                    color = MaterialTheme.colorScheme.onSurface,
+                    fontSize = 12.sp,
+                    fontWeight = FontWeight.Medium,
+                )
+            }
+        }
 
         Spacer(modifier = Modifier.height(14.dp))
 
@@ -167,6 +199,7 @@ private fun MonthSwitcher(
             textAlign = TextAlign.Center,
             fontSize = 18.sp,
             fontWeight = FontWeight.SemiBold,
+            fontFamily = FontFamily.Serif,
             color = MaterialTheme.colorScheme.onSurface,
         )
 
@@ -192,6 +225,7 @@ private fun TableHeader() {
         modifier = Modifier
             .fillMaxWidth()
             .height(50.dp)
+            .background(MaterialTheme.colorScheme.surfaceContainer)
             .padding(start = 52.dp, end = 8.dp),
         verticalAlignment = Alignment.CenterVertically,
     ) {
@@ -220,7 +254,6 @@ private fun TableHeader() {
 
 @Composable
 private fun CalendarDayRow(row: MonthRow) {
-    val bgColor = if (row.isToday) Gold.copy(alpha = 0.12f) else MaterialTheme.colorScheme.surface
     val textColor = if (row.isToday) MaterialTheme.colorScheme.onSurface else MaterialTheme.colorScheme.onSurface.copy(alpha = 0.7f)
     val textWeight = if (row.isToday) FontWeight.SemiBold else FontWeight.Medium
 
@@ -228,7 +261,20 @@ private fun CalendarDayRow(row: MonthRow) {
         modifier = Modifier
             .fillMaxWidth()
             .height(46.dp)
-            .background(bgColor),
+            .then(
+                if (row.isToday) {
+                    Modifier.background(
+                        Brush.horizontalGradient(
+                            colors = listOf(
+                                Gold.copy(alpha = 0.18f),
+                                Gold.copy(alpha = 0.08f),
+                            )
+                        )
+                    )
+                } else {
+                    Modifier.background(MaterialTheme.colorScheme.surface)
+                }
+            ),
         verticalAlignment = Alignment.CenterVertically,
     ) {
         // Today indicator bar
@@ -250,8 +296,9 @@ private fun CalendarDayRow(row: MonthRow) {
             Text(
                 text = "${row.day}",
                 color = textColor,
-                fontSize = 17.sp,
+                fontSize = 16.sp,
                 fontWeight = FontWeight.SemiBold,
+                fontFamily = FontFamily.Serif,
             )
             Text(
                 text = row.dayOfWeek,
@@ -270,7 +317,7 @@ private fun CalendarDayRow(row: MonthRow) {
                 Text(
                     text = time,
                     color = textColor,
-                    fontSize = 12.sp,
+                    fontSize = 11.5.sp,
                     fontWeight = textWeight,
                     textAlign = TextAlign.Center,
                     modifier = Modifier.weight(1f),

@@ -1,6 +1,7 @@
 package com.ambercatalbas.vaktinde.feature.settings
 
 import android.content.Intent
+import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
@@ -26,6 +27,7 @@ import androidx.compose.material.icons.filled.Info
 import androidx.compose.material.icons.filled.Language
 import androidx.compose.material.icons.filled.LocationOn
 import androidx.compose.material.icons.filled.Notifications
+import androidx.compose.material.icons.filled.Security
 import androidx.compose.material.icons.filled.Share
 import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.Icon
@@ -40,8 +42,10 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.drawscope.Fill
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
@@ -54,6 +58,7 @@ import com.ambercatalbas.vaktinde.core.domain.model.CalcMethod
 import com.ambercatalbas.vaktinde.core.ui.R
 import com.ambercatalbas.vaktinde.core.ui.theme.Dimens
 import com.ambercatalbas.vaktinde.core.ui.theme.Gold
+import kotlin.random.Random
 
 @Composable
 fun SettingsScreen(
@@ -155,6 +160,11 @@ fun SettingsScreen(
                     }
                     context.startActivity(Intent.createChooser(shareIntent, null))
                 },
+            )
+            SettingsRow(
+                icon = Icons.Default.Security,
+                title = stringResource(R.string.settings_privacy),
+                onClick = { /* TODO: open privacy policy */ },
                 showDivider = false,
             )
         }
@@ -257,6 +267,23 @@ private fun BrandCard() {
             )
             .padding(22.dp),
     ) {
+        // Star field
+        Canvas(modifier = Modifier.matchParentSize()) {
+            val random = Random(123)
+            repeat(12) {
+                val x = random.nextFloat() * size.width
+                val y = random.nextFloat() * size.height
+                val opacity = 0.15f + random.nextFloat() * 0.35f
+                val radius = 0.3f + random.nextFloat() * 0.8f
+                drawCircle(
+                    color = Color.White.copy(alpha = opacity),
+                    radius = radius.dp.toPx(),
+                    center = Offset(x, y),
+                    style = Fill,
+                )
+            }
+        }
+
         Row(verticalAlignment = Alignment.CenterVertically) {
             Icon(
                 painter = painterResource(id = com.ambercatalbas.vaktinde.core.ui.R.drawable.ic_crescent_moon),
@@ -272,7 +299,7 @@ private fun BrandCard() {
                     fontWeight = FontWeight.Medium,
                 )
                 Text(
-                    text = "v1.0.0",
+                    text = stringResource(R.string.settings_brand_tagline),
                     color = Color.White.copy(alpha = 0.5f),
                     fontSize = 12.5.sp,
                 )
@@ -286,9 +313,9 @@ private fun SectionHeader(title: String) {
     Text(
         text = title,
         color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.4f),
-        fontSize = 12.sp,
+        fontSize = 11.sp,
         fontWeight = FontWeight.SemiBold,
-        letterSpacing = 0.5.sp,
+        letterSpacing = 0.6.sp,
         modifier = Modifier.padding(start = 6.dp, bottom = 8.dp),
     )
 }
@@ -359,7 +386,7 @@ private fun SettingsRow(
                 imageVector = Icons.AutoMirrored.Filled.KeyboardArrowRight,
                 contentDescription = null,
                 tint = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.3f),
-                modifier = Modifier.size(18.dp),
+                modifier = Modifier.size(20.dp),
             )
         }
 
@@ -367,7 +394,7 @@ private fun SettingsRow(
             Box(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .padding(start = 67.dp)
+                    .padding(start = 62.dp)
                     .height(0.5.dp)
                     .background(MaterialTheme.colorScheme.outline),
             )
@@ -395,11 +422,14 @@ private fun SelectionDialog(
                             .fillMaxWidth()
                             .clip(RoundedCornerShape(12.dp))
                             .then(
-                                if (isSelected) Modifier.background(Gold.copy(alpha = 0.12f))
-                                else Modifier
+                                if (isSelected) {
+                                    Modifier
+                                        .background(Gold.copy(alpha = 0.12f))
+                                        .border(1.dp, Gold.copy(alpha = 0.4f), RoundedCornerShape(12.dp))
+                                } else Modifier
                             )
                             .clickable { onSelect(value) }
-                            .padding(horizontal = 16.dp, vertical = 14.dp),
+                            .padding(horizontal = 13.dp, vertical = 11.dp),
                         verticalAlignment = Alignment.CenterVertically,
                     ) {
                         Text(

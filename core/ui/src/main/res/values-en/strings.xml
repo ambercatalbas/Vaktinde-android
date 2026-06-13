@@ -38,7 +38,7 @@
     <string name="home_minutes">minutes</string>
 
     <!-- Tabs -->
-    <string name="tab_home">Times</string>
+    <string name="tab_home">Home</string>
     <string name="tab_qibla">Qibla</string>
     <string name="tab_calendar">Calendar</string>
     <string name="tab_settings">Settings</string>
@@ -71,6 +71,8 @@
     <string name="settings_about">ABOUT</string>
     <string name="settings_about_app">About Vaktinde</string>
     <string name="settings_share">Share App</string>
+    <string name="settings_privacy">Privacy Policy</string>
+    <string name="settings_brand_tagline">Version 1.0 · Peacefully, on time</string>
 
     <!-- Themes -->
     <string name="theme_dark">Dark</string>

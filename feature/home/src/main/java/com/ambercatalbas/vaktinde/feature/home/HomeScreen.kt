@@ -4,19 +4,23 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.KeyboardArrowDown
+import androidx.compose.material.icons.filled.LocationOn
 import androidx.compose.material.icons.filled.Notifications
 import androidx.compose.material.icons.filled.Share
 import androidx.compose.material3.CircularProgressIndicator
@@ -40,6 +44,7 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.ambercatalbas.vaktinde.core.domain.model.PrayerType
 import com.ambercatalbas.vaktinde.core.ui.R
 import com.ambercatalbas.vaktinde.core.ui.theme.Dimens
+import com.ambercatalbas.vaktinde.core.ui.theme.Gold
 import com.ambercatalbas.vaktinde.feature.home.components.HeroCountdownCard
 import com.ambercatalbas.vaktinde.feature.home.components.MiniQiblaCompass
 import com.ambercatalbas.vaktinde.feature.home.components.HijriDateRow
@@ -74,6 +79,7 @@ fun HomeScreen(
         // Top bar
         TopBar(
             cityName = state.cityName,
+            cityRegion = state.cityRegion,
             gregorianDate = state.gregorianDate,
             qiblaBearing = state.qiblaBearing,
             onCityClick = onNavigateToCitySelection,
@@ -190,6 +196,7 @@ fun HomeScreen(
 @Composable
 private fun TopBar(
     cityName: String,
+    cityRegion: String,
     gregorianDate: String,
     qiblaBearing: Double,
     onCityClick: () -> Unit,
@@ -202,13 +209,20 @@ private fun TopBar(
             .padding(horizontal = Dimens.StandardPadding, vertical = 12.dp),
         verticalAlignment = Alignment.CenterVertically,
     ) {
-        // Left: Mini Qibla + City and date
+        // Left: Mini Qibla + Location icon + City and date
         Row(
             modifier = Modifier.weight(1f),
             verticalAlignment = Alignment.CenterVertically,
             horizontalArrangement = Arrangement.spacedBy(10.dp),
         ) {
             MiniQiblaCompass(qiblaBearing = qiblaBearing)
+
+            Icon(
+                imageVector = Icons.Default.LocationOn,
+                contentDescription = null,
+                tint = Gold,
+                modifier = Modifier.size(17.dp),
+            )
 
             Column {
                 Row(
@@ -229,11 +243,19 @@ private fun TopBar(
                         modifier = Modifier.size(20.dp),
                     )
                 }
+                if (cityRegion.isNotEmpty()) {
+                    Text(
+                        text = cityRegion,
+                        color = MaterialTheme.colorScheme.onBackground.copy(alpha = 0.5f),
+                        fontSize = 13.sp,
+                    )
+                }
                 if (gregorianDate.isNotEmpty()) {
                     Text(
                         text = gregorianDate,
                         color = MaterialTheme.colorScheme.onBackground.copy(alpha = 0.5f),
                         fontSize = 13.sp,
+                        modifier = Modifier.padding(start = 23.dp),
                     )
                 }
             }
@@ -245,8 +267,7 @@ private fun TopBar(
                 icon = Icons.Default.Share,
                 onClick = onShareClick,
             )
-            ActionButton(
-                icon = Icons.Default.Notifications,
+            NotificationButton(
                 onClick = onNotificationsClick,
             )
         }
@@ -261,16 +282,48 @@ private fun ActionButton(
     IconButton(
         onClick = onClick,
         modifier = Modifier
-            .size(42.dp)
-            .clip(RoundedCornerShape(14.dp))
+            .size(44.dp)
+            .clip(RoundedCornerShape(99.dp))
             .background(MaterialTheme.colorScheme.surfaceVariant)
-            .border(1.dp, MaterialTheme.colorScheme.outline, RoundedCornerShape(14.dp)),
+            .border(1.dp, MaterialTheme.colorScheme.outline, RoundedCornerShape(99.dp)),
     ) {
         Icon(
             imageVector = icon,
             contentDescription = null,
             tint = MaterialTheme.colorScheme.onSurface,
             modifier = Modifier.size(20.dp),
+        )
+    }
+}
+
+@Composable
+private fun NotificationButton(
+    onClick: () -> Unit,
+) {
+    Box {
+        IconButton(
+            onClick = onClick,
+            modifier = Modifier
+                .size(44.dp)
+                .clip(RoundedCornerShape(99.dp))
+                .background(MaterialTheme.colorScheme.surfaceVariant)
+                .border(1.dp, MaterialTheme.colorScheme.outline, RoundedCornerShape(99.dp)),
+        ) {
+            Icon(
+                imageVector = Icons.Default.Notifications,
+                contentDescription = null,
+                tint = MaterialTheme.colorScheme.onSurface,
+                modifier = Modifier.size(20.dp),
+            )
+        }
+        // Notification dot
+        Box(
+            modifier = Modifier
+                .size(7.dp)
+                .clip(CircleShape)
+                .background(Gold)
+                .align(Alignment.TopEnd)
+                .offset(x = (-2).dp, y = 2.dp)
         )
     }
 }

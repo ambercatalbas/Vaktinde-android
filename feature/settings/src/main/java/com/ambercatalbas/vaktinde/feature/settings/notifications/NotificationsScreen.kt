@@ -426,8 +426,8 @@ private fun PrayerNotificationRow(
         ) {
             Icon(
                 imageVector = when (mode) {
-                    NotificationMode.ADHAN -> Icons.Default.Notifications
-                    NotificationMode.SILENT -> Icons.Default.Notifications
+                    NotificationMode.ADHAN -> Icons.AutoMirrored.Filled.VolumeUp
+                    NotificationMode.SILENT -> Icons.Default.Vibration
                     NotificationMode.OFF -> Icons.Default.NotificationsOff
                 },
                 contentDescription = null,
@@ -542,12 +542,12 @@ private fun ModeChip(
         fontSize = 13.sp,
         fontWeight = if (isSelected) FontWeight.SemiBold else FontWeight.Normal,
         modifier = Modifier
-            .clip(RoundedCornerShape(20.dp))
+            .clip(RoundedCornerShape(8.dp))
             .background(bgColor)
             .border(
                 width = if (isSelected) 0.dp else 1.dp,
                 color = MaterialTheme.colorScheme.outline,
-                shape = RoundedCornerShape(20.dp),
+                shape = RoundedCornerShape(8.dp),
             )
             .clickable(onClick = onClick)
             .padding(horizontal = 16.dp, vertical = 8.dp),

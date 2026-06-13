@@ -42,6 +42,7 @@ data class HomeUiState(
     val hijriDate: String = "",
     val gregorianDate: String = "",
     val cityName: String = "İstanbul",
+    val cityRegion: String = "Türkiye",
     val qiblaBearing: Double = 0.0,
     val isLoading: Boolean = true,
     val error: String? = null,
@@ -69,7 +70,7 @@ class HomeViewModel @Inject constructor(
         viewModelScope.launch {
             selectedCity.collectLatest { city ->
                 val bearing = calculateQiblaBearing(city.latitude, city.longitude)
-                _uiState.update { it.copy(cityName = city.name, qiblaBearing = bearing, isLoading = true) }
+                _uiState.update { it.copy(cityName = city.name, cityRegion = city.region, qiblaBearing = bearing, isLoading = true) }
                 loadPrayers(city)
             }
         }

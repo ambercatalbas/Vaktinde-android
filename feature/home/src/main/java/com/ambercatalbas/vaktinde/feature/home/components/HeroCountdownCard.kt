@@ -10,6 +10,7 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.CircleShape
@@ -43,12 +44,12 @@ import com.ambercatalbas.vaktinde.core.domain.model.CountdownParts
 import com.ambercatalbas.vaktinde.core.domain.model.Prayer
 import com.ambercatalbas.vaktinde.core.domain.model.PrayerType
 import com.ambercatalbas.vaktinde.core.ui.R
+import com.ambercatalbas.vaktinde.core.ui.theme.TwilightBlue1
+import com.ambercatalbas.vaktinde.core.ui.theme.TwilightBlue2
+import com.ambercatalbas.vaktinde.core.ui.theme.TwilightBlue3
+import com.ambercatalbas.vaktinde.core.ui.theme.TwilightBlue4
 import kotlin.random.Random
 
-private val TwilightBlue1 = Color(0xFF234468)
-private val TwilightBlue2 = Color(0xFF16304E)
-private val TwilightBlue3 = Color(0xFF0D2138)
-private val TwilightBlue4 = Color(0xFF0A1A2E)
 private val GoldAccent = Color(0xFFF0D4A0)
 private val TextLight = Color(0xFFEEF4FB)
 private val TextDim = Color(0xFFDCE8F6)
@@ -74,7 +75,7 @@ fun HeroCountdownCard(
     Box(
         modifier = modifier
             .fillMaxWidth()
-            .clip(RoundedCornerShape(34.dp))
+            .clip(RoundedCornerShape(28.dp))
             .drawBehind {
                 // Twilight radial gradient background
                 drawRect(TwilightBlue4)
@@ -104,10 +105,10 @@ fun HeroCountdownCard(
                 )
             }
     ) {
-        // Star field
+        // Star field (20 stars)
         Canvas(modifier = Modifier.fillMaxSize()) {
             val random = Random(42)
-            repeat(16) {
+            repeat(20) {
                 val x = random.nextFloat() * size.width
                 val y = random.nextFloat() * size.height * 0.64f
                 val opacity = 0.2f + random.nextFloat() * 0.5f
@@ -121,14 +122,14 @@ fun HeroCountdownCard(
             }
         }
 
-        // Crescent moon (top-right)
+        // Crescent moon (top-right, adjusted position)
         Icon(
             painter = painterResource(id = com.ambercatalbas.vaktinde.core.ui.R.drawable.ic_crescent_moon),
             contentDescription = null,
             tint = GoldAccent.copy(alpha = 0.3f),
             modifier = Modifier
                 .align(Alignment.TopEnd)
-                .padding(top = 4.dp, end = 14.dp)
+                .offset(x = 6.dp, y = (-10).dp)
                 .size(120.dp)
         )
 
@@ -136,7 +137,7 @@ fun HeroCountdownCard(
         Column(
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(start = 26.dp, end = 26.dp, top = 26.dp, bottom = 22.dp)
+                .padding(start = 24.dp, end = 24.dp, top = 24.dp, bottom = 20.dp)
         ) {
             // 1) Current prayer indicator
             Row(
@@ -153,8 +154,8 @@ fun HeroCountdownCard(
                     text = "${stringResource(R.string.home_current_prayer)} · ${currentName.uppercase()}",
                     color = TextDim.copy(alpha = 0.7f),
                     fontSize = 12.5.sp,
-                    fontWeight = FontWeight.SemiBold,
-                    letterSpacing = 1.4.sp,
+                    fontWeight = FontWeight.Bold,
+                    letterSpacing = 1.2.sp,
                 )
             }
 
@@ -170,14 +171,14 @@ fun HeroCountdownCard(
                     contentDescription = null,
                     tint = GoldAccent.copy(alpha = 0.7f),
                     modifier = Modifier
-                        .size(28.dp)
+                        .size(29.dp)
                         .padding(top = 4.dp),
                 )
                 Column {
                     Text(
                         text = nextBadge,
                         color = TextDim.copy(alpha = 0.65f),
-                        fontSize = 14.sp,
+                        fontSize = 13.5.sp,
                     )
                     Row(
                         verticalAlignment = Alignment.Bottom,
@@ -186,14 +187,14 @@ fun HeroCountdownCard(
                         Text(
                             text = nextName,
                             color = TextLight,
-                            fontSize = 27.sp,
+                            fontSize = 25.sp,
                             fontWeight = FontWeight.SemiBold,
                             fontFamily = FontFamily.Serif,
                         )
                         Text(
                             text = nextPrayer.timeString,
                             color = GoldAccent,
-                            fontSize = 16.sp,
+                            fontSize = 15.sp,
                             fontWeight = FontWeight.SemiBold,
                             modifier = Modifier.padding(bottom = 2.dp),
                         )
@@ -215,22 +216,22 @@ fun HeroCountdownCard(
                 Text(
                     text = mainText,
                     color = TextLight,
-                    fontSize = 60.sp,
+                    fontSize = 56.sp,
                     fontWeight = FontWeight.Normal,
                     fontFamily = FontFamily.Serif,
-                    lineHeight = 60.sp,
+                    lineHeight = 56.sp,
                 )
                 Text(
                     text = ":${countdown.seconds}",
                     color = TextDim.copy(alpha = 0.6f),
-                    fontSize = 30.sp,
+                    fontSize = 28.sp,
                     fontFamily = FontFamily.Serif,
                     modifier = Modifier.padding(bottom = 6.dp),
                 )
                 Text(
                     text = if (hasHours) hoursLabel else minutesLabel,
                     color = TextDim.copy(alpha = 0.6f),
-                    fontSize = 13.5.sp,
+                    fontSize = 13.sp,
                     modifier = Modifier.padding(start = 10.dp, bottom = 10.dp),
                 )
             }
@@ -268,12 +269,12 @@ fun HeroCountdownCard(
                 Text(
                     text = currentName,
                     color = TextDim.copy(alpha = 0.55f),
-                    fontSize = 12.sp,
+                    fontSize = 11.5.sp,
                 )
                 Text(
                     text = "$nextName ${nextPrayer.timeString}",
                     color = TextDim.copy(alpha = 0.55f),
-                    fontSize = 12.sp,
+                    fontSize = 11.5.sp,
                 )
             }
         }

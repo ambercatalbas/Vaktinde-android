@@ -18,6 +18,7 @@ private val DarkColorScheme = darkColorScheme(
     surface = DarkSurface,
     onSurface = DarkOnSurface,
     surfaceVariant = DarkSurfaceVariant,
+    surfaceContainer = DarkSurfaceContainer,
     outline = DarkBorder,
 )
 

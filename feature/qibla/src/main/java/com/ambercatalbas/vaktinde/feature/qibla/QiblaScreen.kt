@@ -15,6 +15,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Explore
@@ -31,6 +32,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.geometry.Offset
+import androidx.compose.ui.geometry.Size
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Path
 import androidx.compose.ui.graphics.drawscope.DrawScope
@@ -41,6 +43,7 @@ import androidx.compose.ui.graphics.nativeCanvas
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -52,6 +55,7 @@ import com.ambercatalbas.vaktinde.core.ui.theme.Gold
 import com.ambercatalbas.vaktinde.core.ui.theme.GoldSoft
 import kotlin.math.cos
 import kotlin.math.sin
+import kotlin.random.Random
 
 @Composable
 fun QiblaScreen(
@@ -101,19 +105,28 @@ fun QiblaScreen(
                 qiblaBearing = state.qiblaBearing.toFloat(),
             )
 
-            // Center angle display
-            Column(horizontalAlignment = Alignment.CenterHorizontally) {
-                Text(
-                    text = state.bearingText,
-                    color = Color.White,
-                    fontSize = 36.sp,
-                    fontWeight = FontWeight.Bold,
-                )
-                Text(
-                    text = stringResource(R.string.qibla_angle),
-                    color = Color.White.copy(alpha = 0.5f),
-                    fontSize = 12.sp,
-                )
+            // Center hub with angle
+            Box(
+                modifier = Modifier
+                    .size(94.dp)
+                    .clip(CircleShape)
+                    .background(Color(0xFF0C1626)),
+                contentAlignment = Alignment.Center,
+            ) {
+                Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                    Text(
+                        text = state.bearingText,
+                        color = Color.White,
+                        fontSize = 29.sp,
+                        fontWeight = FontWeight.Bold,
+                        fontFamily = FontFamily.Serif,
+                    )
+                    Text(
+                        text = stringResource(R.string.qibla_angle),
+                        color = Color.White.copy(alpha = 0.5f),
+                        fontSize = 12.sp,
+                    )
+                }
             }
         }
 
@@ -206,19 +219,36 @@ private fun CompassCanvas(
             drawCircle(outerRingDark, outerRadius, Offset(cx, cy))
             drawCircle(innerCircleDark, innerRadius, Offset(cx, cy))
 
-            // Tick marks
-            for (deg in 0 until 360) {
+            // Star field (18 stars within compass)
+            val random = Random(77)
+            repeat(18) {
+                val angle = random.nextFloat() * 360f
+                val dist = innerRadius * 0.15f + random.nextFloat() * innerRadius * 0.75f
+                val rad = Math.toRadians(angle.toDouble()).toFloat()
+                val sx = cx + dist * cos(rad)
+                val sy = cy + dist * sin(rad)
+                val opacity = 0.1f + random.nextFloat() * 0.25f
+                val starRadius = 0.3f + random.nextFloat() * 0.7f
+                drawCircle(
+                    color = Color.White.copy(alpha = opacity),
+                    radius = starRadius.dp.toPx(),
+                    center = Offset(sx, sy),
+                    style = Fill,
+                )
+            }
+
+            // Tick marks - every 5 degrees (72 ticks), major every 45 degrees
+            for (i in 0 until 72) {
+                val deg = i * 5
                 val rad = Math.toRadians(deg.toDouble() - 90).toFloat()
-                val isMajor = deg % 90 == 0
+                val isMajor = deg % 45 == 0
                 val is30 = deg % 30 == 0
-                val is10 = deg % 10 == 0
 
                 val (len, width, color) = when {
                     isMajor -> Triple(8.dp.toPx(), 2.5f.dp.toPx(), goldColor)
                     is30 -> Triple(13.dp.toPx(), 2f.dp.toPx(), goldDim)
-                    is10 -> Triple(9.dp.toPx(), 1.2f.dp.toPx(), Color.White.copy(alpha = 0.35f))
-                    deg % 2 == 0 -> Triple(5.dp.toPx(), 0.8f.dp.toPx(), Color.White.copy(alpha = 0.15f))
-                    else -> continue
+                    deg % 10 == 0 -> Triple(9.dp.toPx(), 1.2f.dp.toPx(), Color.White.copy(alpha = 0.35f))
+                    else -> Triple(5.dp.toPx(), 0.8f.dp.toPx(), Color.White.copy(alpha = 0.15f))
                 }
 
                 val startR = outerRadius - len
@@ -252,15 +282,27 @@ private fun CompassCanvas(
                 ),
             )
 
-            // Kaaba marker on ring
+            // Kaaba marker on ring - rounded rect 38x38 with borderRadius 12
             val markerR = innerRadius + ringWidth / 2
             val markerX = cx + markerR * cos(qiblaRad)
             val markerY = cy + markerR * sin(qiblaRad)
-            drawCircle(goldColor, 12.dp.toPx(), Offset(markerX, markerY))
-            drawRect(
-                innerCircleDark,
-                topLeft = Offset(markerX - 5.dp.toPx(), markerY - 5.dp.toPx()),
-                size = androidx.compose.ui.geometry.Size(10.dp.toPx(), 10.dp.toPx()),
+            val markerSize = 38.dp.toPx()
+            val markerCorner = 12.dp.toPx()
+
+            // Draw rounded rect marker
+            drawRoundRect(
+                color = goldColor,
+                topLeft = Offset(markerX - markerSize / 2, markerY - markerSize / 2),
+                size = Size(markerSize, markerSize),
+                cornerRadius = androidx.compose.ui.geometry.CornerRadius(markerCorner, markerCorner),
+            )
+            // Inner Kaaba icon (simplified box)
+            val boxSize = 14.dp.toPx()
+            drawRoundRect(
+                color = innerCircleDark,
+                topLeft = Offset(markerX - boxSize / 2, markerY - boxSize / 2),
+                size = Size(boxSize, boxSize),
+                cornerRadius = androidx.compose.ui.geometry.CornerRadius(2.dp.toPx(), 2.dp.toPx()),
             )
         }
 
@@ -285,9 +327,13 @@ private fun DrawScope.drawCardinalLabels(
     val labelR = innerRadius + ringWidth * 0.52f
     val cardinals = listOf(
         Triple(0f, "K", true),
+        Triple(45f, "KD", false),
         Triple(90f, "D", false),
+        Triple(135f, "GD", false),
         Triple(180f, "G", false),
+        Triple(225f, "GB", false),
         Triple(270f, "B", false),
+        Triple(315f, "KB", false),
     )
     val paint = android.graphics.Paint().apply {
         textAlign = android.graphics.Paint.Align.CENTER
@@ -301,7 +347,7 @@ private fun DrawScope.drawCardinalLabels(
 
         paint.apply {
             color = if (isNorth) {
-                android.graphics.Color.rgb(212, 164, 74)
+                android.graphics.Color.rgb(224, 184, 106)
             } else {
                 android.graphics.Color.argb(140, 255, 255, 255)
             }

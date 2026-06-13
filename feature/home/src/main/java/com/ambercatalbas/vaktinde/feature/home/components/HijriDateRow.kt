@@ -17,6 +17,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -34,7 +35,7 @@ fun HijriDateRow(
             .clip(RoundedCornerShape(Dimens.RowRadius))
             .background(MaterialTheme.colorScheme.surface)
             .border(1.dp, MaterialTheme.colorScheme.outline, RoundedCornerShape(Dimens.RowRadius))
-            .padding(horizontal = 18.dp, vertical = 13.dp),
+            .padding(horizontal = 16.dp, vertical = 13.dp),
         verticalAlignment = Alignment.CenterVertically,
         horizontalArrangement = Arrangement.spacedBy(10.dp),
     ) {
@@ -47,7 +48,7 @@ fun HijriDateRow(
         Text(
             text = stringResource(R.string.home_hijri_calendar),
             color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.6f),
-            fontSize = 14.5.sp,
+            fontSize = 14.sp,
             modifier = Modifier.weight(1f),
         )
         Text(
@@ -55,6 +56,7 @@ fun HijriDateRow(
             color = MaterialTheme.colorScheme.onSurface,
             fontSize = 16.sp,
             fontWeight = FontWeight.SemiBold,
+            fontFamily = FontFamily.Serif,
         )
     }
 }

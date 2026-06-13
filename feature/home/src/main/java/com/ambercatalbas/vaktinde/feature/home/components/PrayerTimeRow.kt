@@ -20,6 +20,7 @@ import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -73,7 +74,7 @@ fun PrayerTimeRow(
                     Modifier.border(1.dp, borderColor, RoundedCornerShape(18.dp))
                 } else Modifier
             )
-            .padding(horizontal = 18.dp, vertical = 15.dp),
+            .padding(horizontal = 16.dp, vertical = 14.dp),
         verticalAlignment = Alignment.CenterVertically,
         horizontalArrangement = Arrangement.spacedBy(14.dp),
     ) {
@@ -101,7 +102,7 @@ fun PrayerTimeRow(
             Text(
                 text = prayerDisplayName(prayer.type),
                 color = nameColor,
-                fontSize = 16.5.sp,
+                fontSize = 16.sp,
                 fontWeight = FontWeight.SemiBold,
             )
             Text(
@@ -116,7 +117,7 @@ fun PrayerTimeRow(
             Text(
                 text = stringResource(R.string.home_next_badge),
                 color = GoldSoft,
-                fontSize = 10.5.sp,
+                fontSize = 10.sp,
                 fontWeight = FontWeight.Bold,
                 modifier = Modifier
                     .clip(RoundedCornerShape(10.dp))
@@ -129,8 +130,9 @@ fun PrayerTimeRow(
         Text(
             text = prayer.timeString,
             color = timeColor,
-            fontSize = 21.sp,
+            fontSize = 20.sp,
             fontWeight = FontWeight.SemiBold,
+            fontFamily = FontFamily.Serif,
         )
     }
 }
